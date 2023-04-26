@@ -1,0 +1,9 @@
+Original UFO file retrieved from
+http://feynrules.irmp.ucl.ac.be/attachment/wiki/Top-Philic-Zprime/Top_Philic_UFO.zip
+on 10.12.2020 by Philipp Gadow (paul.philipp.gadow@cern.ch)
+
+More information:
+http://feynrules.irmp.ucl.ac.be/wiki/Top-Philic-Zprime
+
+This UFO is almost identical to Top-Philic_UFO_V1, except for the fact that the theta1 parameter is accessible and can be configured.
+

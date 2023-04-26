@@ -1,0 +1,3 @@
+[submodule "batch_submission"]
+	path = batch_submission
+	url = git@github.com:philippgadow/evgen_batch.git

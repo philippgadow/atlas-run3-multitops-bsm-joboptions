@@ -56,33 +56,28 @@ print("- process ID {p}".format(p=process_id))
 print("- ME reweighting enabled {p}".format(p=reweight))
 
 
-# MadGraph PDF base fragment
-import MadGraphControl.MadGraphUtils
-MadGraphControl.MadGraphUtils.MADGRAPH_PDFSETTING={
-    # central PDF + variations for 315200 / NNPDF31_lo_as_0130
-    'central_pdf':315200, # the lhapf id of the central pdf, see https://lhapdf.hepforge.org/pdfsets
-    'pdf_variations':[315200], # pdfs for which all variations (error sets) will be included as weights
-    'alternative_pdfs':[], # pdfs for which only the central set will be included as weights
-    'scale_variations':[0.5,1.,2.], # variations of muR and muF wrt the central scale, all combinations of muF and muR will be evaluated
-    # 'use_syst': "False", # use this and comment the previous ones if systematic variations are not needed
-}
+# MadGraph PDF base fragment + definitions for 4FS and 5FS
+doFiveFlavourScheme = True
+model = "Top-Philic_UFO_V1_v2-no_b_mass"
+protoncontent = "g u c d s u~ c~ d~ s~ b b~"
+if process_id in ['resjt_4f', 'reswt_4f', 'ttjt_4f', 'ttwt_4f']:
+  import MadGraphControl.MadGraph_NNPDF30NLOnf4_Base_Fragment
+  doFiveFlavourScheme = False
+  model = "Top-Philic_UFO_V1_v2"
+  protoncontent = "g u c d s u~ c~ d~ s~"
+else:
+  import MadGraphControl.MadGraph_NNPDF30NLO_Base_Fragment
 
 extras = {'auto_ptj_mjj':'False',
-          'maxjetflavor':'5',
+          'maxjetflavor':'5' if doFiveFlavourScheme else '4',
+          'asrwgtflavor': '5' if doFiveFlavourScheme else '4',
           'event_norm':'sum',
           'cut_decays':'F', 
           'dynamical_scale_choice':3,
           }
 
-# set bwcutoff to 100 for tttt and ttttsm production to ensure that
-# the resonance is written always to the LHE record
-# (does not affect cross-section, as no decay chain syntax is used for these processes)
-if process_id in ['tttt', 'ttttsm']:
-  extras['bwcutoff'] = 150
-
 parameters = {
     'mass':{
-        'MB': 0.,
         'Mv1': mass,
     },
     'decay':{
@@ -107,19 +102,31 @@ if (nevents <0):
 process_string = {
  "restt": "generate p p > t t~ v1/v1, v1 > t t~",
  "resjt": "generate p p > top j v1/v1, v1 > t t~",
+ "resjt_4f": "generate p p > top j bottom v1/v1, v1 > t t~",
  "reswt": "generate p p > top w v1/v1, v1 > t t~",
+ "reswt_4f": "generate p p > top w bottom v1/v1, v1 > t t~",
  "tttt": "generate p p > t t~ t t~ QCD<=2 Qv1==2 QED==0",
  "ttttsm": "generate p p > t t~ t t~ QCD<=4 Qv1<=2 QED<=2",
+ "ttjt": "generate p p > t t~ j top QCD<=2 Qv1==2",
+ "ttwt": "generate p p > t t~ w top / h Z a w+ w-",
+ "ttjt_4f": "generate p p > t t~ j top bottom QCD<=2 Qv1==2 QED==0",
+ "ttwt_4f": "generate p p > t t~ w top bottom QCD<=2 Qv1==2",
 }
 
 process = """
-import model Top-Philic_UFO_V1_v2
-define p = g u c d s u~ c~ d~ s~ b b~
-define j = g u c d s u~ c~ d~ s~ b b~
+set stdout_level DEBUG
+import model {model}
+define p = {protoncontent}
+define j = {protoncontent}
 define top = t t~
+define bottom = b b~
 define w = w+ w-
 {process_string}
-output -f""".format(process_string=process_string[process_id])
+output -f""".format(
+  process_string=process_string[process_id],
+  model=model,
+  protoncontent=protoncontent,
+)
 
 process_dir = new_process(process)
 
@@ -173,9 +180,9 @@ arrange_output(process_dir=process_dir, runArgs=runArgs, lhe_version=lhe_version
 # Storing information and post-processing with parton shower                                                                                                                            
 #---------------------------------------------------------------------------------------------------   
 # Some more information
-evgenConfig.description = "pp -> ttV1, V1->tt signal point"
+evgenConfig.description = "pp -> tttt, ttjt and ttWt signal points with top-philic V1 resonance"
 evgenConfig.keywords = ["exotic", "BSM", "RandallSundrum", "warpedED"]
-evgenConfig.contact = ["James Ferrando <james.ferrando@desy.de>", "Philipp Gadow <paul.philipp.gadow@cern.ch>"]
+evgenConfig.contact = ["Philipp Gadow <paul.philipp.gadow@cern.ch>"]
 evgenConfig.process = "pp>ttv1> tttt"  # e.g. pp>G*>WW>qqqq
 
 # Finally, run the parton shower...

@@ -4,3 +4,6 @@
 [submodule "mc15joboptions"]
 	path = mc15joboptions
 	url = ssh://git@gitlab.cern.ch:7999/atlas-physics/pmg/infrastructure/mc15joboptions.git
+[submodule "mcjoboptions"]
+	path = mcjoboptions
+	url = ssh://git@gitlab.cern.ch:7999/atlas-physics/pmg/mcjoboptions.git

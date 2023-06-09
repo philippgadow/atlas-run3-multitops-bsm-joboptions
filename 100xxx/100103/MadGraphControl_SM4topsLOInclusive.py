@@ -47,7 +47,7 @@ extras = {
     'sys_pdf'      : "NNPDF31_lo_as_0118",
     'event_norm'   : "sum",
     'nevents'      : nevents,
-    'bwcutoff'     : '150.0' #     ! (M+/-bwcutoff*Gamma)
+    'bwcutoff'     : '15.0' #     ! (M+/-bwcutoff*Gamma)
     }
 
 process_dir = new_process(process_string)
@@ -113,8 +113,6 @@ mscard.write("""#************************************************************
 #*    https://server06.fynu.ucl.ac.be/projects/madgraph     *
 #*                                                          *
 #************************************************************
-set max_weight_ps_point 400  # number of PS to estimate the maximum for each event
-set Nevents_for_max_weigth 75
 set BW_cut %i
 set seed %i
 %s

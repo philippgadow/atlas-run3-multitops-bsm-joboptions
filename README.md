@@ -37,7 +37,10 @@ With the generation event, also four rivet subroutines are launched:
 You can plot the results with Rivet:
 
 ```bash
-rivet-mkhtml -h
+# the setupRivet script is provided to the PATH after AthGeneration was setup, see e.g.
+# /cvmfs/atlas.cern.ch/repo/sw/software/23.6/AthGeneration/23.6.11/InstallArea/x86_64-centos7-gcc11-opt/bin/setupRivet
+source setupRivet
+rivet-mkhtml --errs --no-weights  -o my_plots Rivet.yoda:"Title=validation plots"
 ```
 
 ### Overview of samples

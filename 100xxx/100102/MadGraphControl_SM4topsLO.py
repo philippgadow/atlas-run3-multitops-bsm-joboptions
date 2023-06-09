@@ -108,7 +108,7 @@ c         m^2+pt^2=p(0)^2-p(3)^2=(p(0)+p(3))*(p(0)-p(3))
 # MadSpin Card
 #---------------------------------------------------------------------------
 
-madspin_card_loc='madspin_card.dat'
+madspin_card_loc=process_dir+'/Cards/madspin_card.dat'
 mscard = open(madspin_card_loc,'w')
 mscard.write("""#************************************************************
 #*                        MadSpin                           *
@@ -120,8 +120,6 @@ mscard.write("""#************************************************************
 #*    https://server06.fynu.ucl.ac.be/projects/madgraph     *
 #*                                                          *
 #************************************************************
-set max_weight_ps_point 400  # number of PS to estimate the maximum for each event
-set Nevents_for_max_weigth 75
 set BW_cut %i
 set seed %i
 %s
@@ -134,8 +132,8 @@ mscard.close()
 # MG5 Generation
 #---------------------------------------------------------------------------
 
-generate(process_dir=process_dir,runArgs=runArgs)
-arrange_output(proc_dir=process_dir, lhe_version=3, saveProcDir=True)
+generate(process_dir=process_dir, runArgs=runArgs)
+arrange_output(process_dir=process_dir, runArgs=runArgs, lhe_version=3, saveProcDir=True)
 
 
 
@@ -145,10 +143,8 @@ arrange_output(proc_dir=process_dir, lhe_version=3, saveProcDir=True)
 
 check_reset_proc_number(opts)
 
-runArgs.inputGeneratorFile=outputDS
 evgenConfig.generators += ["MadGraph"]
 evgenConfig.keywords += keyword
-evgenConfig.minevents = minevents
 evgenConfig.contact = ['S. Berlendis <simon.berlendis@cern.ch>',
                        'NA. Nedaa-Alexandra <nedaa.asbah@cern.ch>',
                        'P. Sabatini <paolo.sabatini@cern.ch>',
@@ -156,5 +152,5 @@ evgenConfig.contact = ['S. Berlendis <simon.berlendis@cern.ch>',
 
 evgenConfig.generators += ["Pythia8"]
 evgenConfig.description = 'Standard-Model 4tops production at LO with MadGraph5 and Pythia8'
-include("MC15JobOptions/Pythia8_A14_NNPDF23LO_EvtGen_Common.py")
-include("MC15JobOptions/Pythia8_MadGraph.py")
+include("Pythia8_i/Pythia8_A14_NNPDF23LO_EvtGen_Common.py")
+include("Pythia8_i/Pythia8_MadGraph.py")

@@ -22,9 +22,13 @@ set gauge unitary
 set complex_mass_scheme False
 import model sm
 define p = g u c d s u~ c~ d~ s~
+define j = p
 define wdec = e+ mu+ ta+ e- mu- ta- ve vm vt ve~ vm~ vt~ g u c d s b u~ c~ d~ s~ b~
-import model 2HDMtypeII 
-generate p p > t t~ h2, (h2 > t t~, (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) 
+import model 2HDMtypeII-nobmass
+define p = p b b~
+define j = p
+generate p p > t j h2, (h2 > t t~, (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)), (t > b w+, w+ > wdec wdec)
+add process p p > t~ j h2, (h2 > t t~, (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)), (t~ > b~ w-, w- > wdec wdec) 
 output -f"""
 
 #---------------------------------------------------------------------------
@@ -37,6 +41,8 @@ extras = { 'lhe_version':'3.0',
            'pdlabel': pdflabel,
            'lhaid': lhaid,
            'nevents' : nevents,
+           'maxjetflavor': 5,
+           'asrwgtflavor': 5,
            'sys_pdf': 'NNPDF31_lo_as_0118',
            'use_syst' : "True"}
 
@@ -47,7 +53,7 @@ modify_run_card(runArgs=runArgs,
                 process_dir=process_dir,
                 settings=extras)
 
-str_param_card='MadGraph_2HDM_for_multitops_paramcard_400_new.dat'
+str_param_card='MadGraph_2HDM_for_multitops_paramcard_400_nobmass.dat'
 modify_param_card(param_card_input=str_param_card,process_dir=process_dir)
 
 print_cards()
@@ -68,8 +74,8 @@ outputDS = arrange_output(process_dir=process_dir,
 check_reset_proc_number(opts)
 
 evgenConfig.generators  += [ "MadGraph"] 
-evgenConfig.description = 'MadGraph_tttt'
-evgenConfig.process= "p p ->t+t~+h2 -> t+t~+t+t~"
+evgenConfig.description = 'MadGraph_tjtt'
+evgenConfig.process= "p p ->t+j+h2 -> t+jt+t~"
 evgenConfig.keywords+=['Higgs','jets']
 evgenConfig.contact = ["kai.chung.tam@cern.ch", "philipp.gadow@cern.ch"]
 runArgs.inputGeneratorFile=outputDS

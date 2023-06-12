@@ -1,0 +1,3 @@
+# BEGIN PLOT /TTTT/.*norm
+LogY=0
+# END PLOT

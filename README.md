@@ -35,16 +35,27 @@ You can plot the results with Rivet:
 # the setupRivet script is provided to the PATH after AthGeneration was setup, see e.g.
 # /cvmfs/atlas.cern.ch/repo/sw/software/23.6/AthGeneration/23.6.11/InstallArea/x86_64-centos7-gcc11-opt/bin/setupRivet
 source setupRivet
+
+# single set of events
 rivet-mkhtml --errs --no-weights  -o my_plots Rivet.yoda:"Title=validation plots"
+
+# compare 13 TeV and 13.6 TeV samples
+rivet-mkhtml --errs --no-weights  -o my_plots output/100400_13000GeV_372777/Rivet.yoda:"Title=sqrt(s)=13TeV" output/100400_13600GeV_126313/Rivet.yoda:"Title=sqrt(s)=13.6TeV"
 ```
 
 ### Overview of samples
 
 #### Signals
 
-| DSID   | process | mass | width | ct   | theta | decay chain                        | reweight |
-| ------ | ------- | ---- | ----- | ---- | ----- | ---------------------------------- | -------- |
-| 100000 | restt   | 1000 | AUTO  |  2.5 |  pi/4 | p > v1 t t~, v1 > t t~             | yes      |
+| DSID   | process      | mass | width | ct   | theta | decay chain                        | reweight |
+| ------ | ------------ | ---- | ----- | ---- | ----- | ---------------------------------- | -------- |
+| 100000 | ttZ' restt   | 1000 | AUTO  |  2.5 |  pi/4 | p > v1 t t~, v1 > t t~             | yes      |
+
+| DSID   | process      | mass | width | tan beta | decay chain                      |
+| ------ | ------------ | ---- | ----- | -------- | -------------------------------- |
+| 100200 | ttH restt    | 400  | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
+| 100300 | tjH 5FS      | 400  | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
+| 100400 | tWH 5FS      | 400  | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
 
 
 #### Backgrounds

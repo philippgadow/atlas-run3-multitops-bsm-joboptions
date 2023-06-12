@@ -3,4 +3,4 @@ condor/
 output/
 *.pyc
 *.pyo
-
+my_plots/

@@ -143,25 +143,8 @@ mscard.close()
 # MG5 Generation
 #---------------------------------------------------------------------------
 
-generate(run_card_loc='run_card.dat',
-         madspin_card_loc='madspin_card.dat',
-         param_card_loc='aMcAtNlo_param_card_loop_sm-no_b_mass.dat',
-         grid_pack=gridpack_mode,
-         gridpack_dir=gridpack_dir,
-         mode=mode,
-         proc_dir=process_dir,
-         run_name=runName,
-         nevents=nevents,
-         runArgs=runArgs
-)
-
-try:
-    outputDS = arrange_output(proc_dir=process_dir,
-                              run_name=runName,
-                              lhe_version=3,
-                              saveProcDir=True)
-except:
-    raise RuntimeError("ERROR: while arranging output.")
+generate(process_dir=process_dir, runArgs=runArgs)
+arrange_output(process_dir=process_dir, runArgs=runArgs, lhe_version=3, saveProcDir=True)
 
 
 #---------------------------------------------------------------------------

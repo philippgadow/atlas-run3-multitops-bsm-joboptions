@@ -11,21 +11,40 @@ if [[ -z ${DSID} ]]; then
 fi
 
 # number of events
-NEVENTS=1
+NEVENTS=${2}
+if [[ -z ${NEVENTS} ]]; then
+    echo "number of events not provided, using 1 as default.";
+    NEVENTS=1;
+fi
+
+# center of mass energy (in GeV)
+COMENERGY=${3}
+if [[ -z ${COMENERGY} ]]; then
+    echo "center of mass energy not provided, using 13000. as default.";
+    COMENERGY=13000.;
+fi
+
+# random number generator seed
+SEED=${4}
+if [[ -z ${SEED} ]]; then
+    echo "random seed not provided, using 1234 as default.";
+    SEED=1234;
+fi
+
 
 # launch job
-RESULTDIR=$PWD/output/$DSID
-TMPWORKDIR=/tmp/evtgen_$DSID
+TAG=${DSID}_{$COMENERGY/.*}GeV_${SEED}
+RESULTDIR=$PWD/output/$TAG
+TMPWORKDIR=/tmp/evtgen_$TAG
 
 mkdir -p $RESULTDIR
-
 rm -rf $TMPWORKDIR && mkdir -p $TMPWORKDIR
 cp -r ${DSID:0:3}xxx/$DSID $TMPWORKDIR/
 cd $TMPWORKDIR
-Gen_tf.py --ecmEnergy=13000. --firstEvent=1 --maxEvents=$NEVENTS --randomSeed=1234 --jobConfig=${DSID} --outputEVNTFile=test_DSID_${DSID}.EVNT.root --rivetAnas=MC_FSPARTICLES,MC_JETS,MC_ELECTRONS,MC_MUONS
+Gen_tf.py --firstEvent=1 --maxEvents=$NEVENTS --ecmEnergy=$COMENERGY --randomSeed=$SEED --jobConfig=${DSID} --outputEVNTFile=test_DSID_${DSID}.EVNT.root --rivetAnas=MC_FSPARTICLES,MC_JETS,MC_ELECTRONS,MC_MUONS
 ls
 pwd
 cp $TMPWORKDIR/test_DSID_${DSID}.EVNT.root $RESULTDIR/
-cp $TMPWORKDIR//Rivet.yoda $RESULTDIR/
+cp $TMPWORKDIR/Rivet.yoda $RESULTDIR/
 rm -rf $TMPWORKDIR
 cd -

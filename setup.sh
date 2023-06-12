@@ -5,8 +5,7 @@ source /cvmfs/atlas.cern.ch/repo/ATLASLocalRootBase/user/atlasLocalSetup.sh -q
 
 MYRELEASE="AthGeneration,23.6.11"
 
-rm -rf workdir
-mkdir workdir
+mkdir -p workdir
 cd workdir
 asetup ${MYRELEASE}
 cd -

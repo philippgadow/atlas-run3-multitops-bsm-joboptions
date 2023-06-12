@@ -1,5 +1,6 @@
-batch_submission_build/
 workdir/
+condor/
+output/
 *.pyc
 *.pyo
 

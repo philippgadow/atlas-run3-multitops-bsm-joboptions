@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 DSIDS="100103" #DSIDs in job option directory
 

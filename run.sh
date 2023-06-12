@@ -33,7 +33,7 @@ fi
 
 
 # launch job
-TAG=${DSID}_{$COMENERGY/.*}GeV_${SEED}
+TAG=${DSID}_${COMENERGY/.*}GeV_${SEED}
 RESULTDIR=$PWD/output/$TAG
 TMPWORKDIR=/tmp/evtgen_$TAG
 

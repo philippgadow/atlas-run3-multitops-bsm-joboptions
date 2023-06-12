@@ -46,5 +46,6 @@ ls
 pwd
 cp $TMPWORKDIR/test_DSID_${DSID}.EVNT.root $RESULTDIR/
 cp $TMPWORKDIR/Rivet.yoda $RESULTDIR/
+cat log.generate
 rm -rf $TMPWORKDIR
 cd -

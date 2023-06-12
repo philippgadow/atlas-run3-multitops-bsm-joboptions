@@ -8,21 +8,16 @@ List of releases: https://twiki.cern.ch/twiki/bin/view/AtlasProtected/PmgMcSoftw
 ```
 git clone --recursive git@github.com:philippgadow/atlas-run3-multitops-bsm-joboptions.git
 source setup.sh
-source run.sh
+bash run.sh
 ```
 
 ### Batch submission
-On DESY NAF run:
+On DESY NAF modify `run_batch.sh` to include DSIDs of choice and run:
 
 ```
-source setup_batch.sh
-source run_batch.sh
+source setup.sh
+bash run_batch.sh
 ```
-
-### Modify job option
-
-Take the job option [`100xxx/100000/MadGraphControl_TopPhilicG_4t_v2.py`](https://github.com/philippgadow/bsm4tops_joboptions/blob/master/100xxx/100000/MadGraphControl_TopPhilicG_4t_v2.py) to implement your changes for testing.
-All other copies of that job option are symlinks to this file.
 
 
 ### Make validation plots

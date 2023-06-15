@@ -30,8 +30,8 @@ for item in [batch_path, log_path]:
     if not os.path.exists(item): os.makedirs(item)
 
 handler = CondorHandler(batch_path, log_path)
-handler['runtime'] = 7200 # in seconds (7200 = 2h)
-handler['memory'] = "2GB"
+handler['runtime'] = 28_799 # in seconds (7200 = 2h, 28_800 = 8h)
+handler['memory'] = "4GB"
 handler['cpu'] = 1
 handler['project'] = "af-atlas"
 ## only for lxplus

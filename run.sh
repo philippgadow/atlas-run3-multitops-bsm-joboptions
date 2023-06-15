@@ -37,15 +37,23 @@ TAG=${DSID}_${COMENERGY/.*}GeV_${SEED}
 RESULTDIR=$PWD/output/$TAG
 TMPWORKDIR=/tmp/evtgen_$TAG
 
+
+export RIVET_ANALYSIS_PATH=$RIVET_ANALYSIS_PATH:$PWD/rivet/
+
 mkdir -p $RESULTDIR
 rm -rf $TMPWORKDIR && mkdir -p $TMPWORKDIR
 cp -r ${DSID:0:3}xxx/$DSID $TMPWORKDIR/
+cp -r mcjoboptions/${DSID:0:3}xxx/$DSID $TMPWORKDIR/ 
 cd $TMPWORKDIR
-Gen_tf.py --firstEvent=1 --maxEvents=$NEVENTS --ecmEnergy=$COMENERGY --randomSeed=$SEED --jobConfig=${DSID} --outputEVNTFile=test_DSID_${DSID}.EVNT.root --rivetAnas=MC_FSPARTICLES,MC_JETS,MC_ELECTRONS,MC_MUONS
+
+Gen_tf.py --firstEvent=1 --maxEvents=$NEVENTS --ecmEnergy=$COMENERGY --randomSeed=$SEED \
+--jobConfig=${DSID} --outputEVNTFile=test_DSID_${DSID}.EVNT.root \
+--rivetAnas=tttt_parton,tttt_event
+# --rivetAnas=MC_FSPARTICLES,MC_JETS,MC_ELECTRONS,MC_MUONS
 ls
 pwd
 cp $TMPWORKDIR/test_DSID_${DSID}.EVNT.root $RESULTDIR/
 cp $TMPWORKDIR/Rivet.yoda $RESULTDIR/
 cat log.generate
-rm -rf $TMPWORKDIR
+# rm -rf $TMPWORKDIR
 cd -

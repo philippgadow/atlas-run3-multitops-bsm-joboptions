@@ -8,4 +8,5 @@ MYRELEASE="AthGeneration,23.6.11"
 mkdir -p workdir
 cd workdir
 asetup ${MYRELEASE}
+source setupRivet
 cd -

@@ -31,6 +31,12 @@ if [[ -z ${SEED} ]]; then
     SEED=1234;
 fi
 
+# Input LHE file
+INPUTGENFILE=${5}
+if [[ -z ${INPUTGENFILE} ]]; then
+    echo "input generator file not provided, using TXT.29916609._000001.tar.gz.1 as default.";
+    INPUTGENFILE="TXT.29916609._000001.tar.gz.1";
+fi
 
 # launch job
 TAG=${DSID}_${COMENERGY/.*}GeV_${SEED}
@@ -44,16 +50,18 @@ mkdir -p $RESULTDIR
 rm -rf $TMPWORKDIR && mkdir -p $TMPWORKDIR
 cp -r ${DSID:0:3}xxx/$DSID $TMPWORKDIR/
 cp -r mcjoboptions/${DSID:0:3}xxx/$DSID $TMPWORKDIR/ 
+cp -r ${INPUTGENFILE} $TMPWORKDIR/
 cd $TMPWORKDIR
 
 Gen_tf.py --firstEvent=1 --maxEvents=$NEVENTS --ecmEnergy=$COMENERGY --randomSeed=$SEED \
 --jobConfig=${DSID} --outputEVNTFile=test_DSID_${DSID}.EVNT.root \
---rivetAnas=tttt_parton,tttt_event
+--inputGeneratorFile=${INPUTGENFILE} \
+# --rivetAnas=tttt_parton,tttt_event
 # --rivetAnas=MC_FSPARTICLES,MC_JETS,MC_ELECTRONS,MC_MUONS
 ls
 pwd
 cp $TMPWORKDIR/test_DSID_${DSID}.EVNT.root $RESULTDIR/
-cp $TMPWORKDIR/Rivet.yoda $RESULTDIR/
+# cp $TMPWORKDIR/Rivet.yoda $RESULTDIR/
 cat log.generate
-# rm -rf $TMPWORKDIR
+rm -rf $TMPWORKDIR
 cd -

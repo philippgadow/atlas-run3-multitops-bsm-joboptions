@@ -24,12 +24,7 @@ bash run_batch.sh
 
 ### Make validation plots
 
-With the generation event, also four rivet subroutines are launched:
-
-- [MC_FSPARTICLES](https://rivet.hepforge.org/analyses/MC_FSPARTICLES.html)
-- [MC_JETS](https://rivet.hepforge.org/analyses/MC_JETS.html)
-- [MC_ELECTRONS](https://rivet.hepforge.org/analyses/MC_ELECTRONS.html)
-- [MC_MUONS](https://rivet.hepforge.org/analyses/MC_MUONS.html)
+With the generation event, also some rivet subroutines can be launched.
 
 You can plot the results with Rivet:
 
@@ -68,4 +63,8 @@ rivet-mkhtml --errs --no-weights  -o my_plots output/100400_13000GeV_372777/Rive
 | 100101 | 412043   | tttt (NLO) aMCHw7EG | [412044](https://gitlab.cern.ch/atlas-physics/pmg/infrastructure/mc15joboptions/-/blob/master/share/DSID412xxx/MC15.412044.aMcAtNloHerwig7EvtGen_H7UE_SM4topsNLO.py) [`MadGraphControl_SM4topsNLO.py`](https://gitlab.cern.ch/atlas-physics/pmg/infrastructure/mc15joboptions/-/blob/master/common/MadGraph/MadGraphControl_SM4topsNLO.py) |
 | 100102 | 412115   | tttt (LO) QCD | [412115](https://gitlab.cern.ch/atlas-physics/pmg/infrastructure/mc15joboptions/-/blob/master/share/DSID412xxx/MC15.412115.MadGraphPythia8EvtGen_A14NNPDF31_SM4topsLO.py) [`MadGraphControl_SM4topsLO.py`](https://gitlab.cern.ch/atlas-physics/pmg/infrastructure/mc15joboptions/-/blob/master/common/MadGraph/MadGraphControl_SM4topsLO.py) |
 | 100103 | 500326   | tttt (LO) QCD + EWK | [500326](https://gitlab.cern.ch/atlas-physics/pmg/mcjoboptions/-/tree/master/500xxx/500326) |
+| 101000 |          | ttH (semilep tt) PhPy8 | still testing |
+| 101001 |          | ttH (semilep tt) PhH7  | still testing |
+| 101002 |          | ttH (dilep tt) PhPy8   | still testing |
+| 101002 |          | ttH (dilep tt) PhH7    | still testing |
 

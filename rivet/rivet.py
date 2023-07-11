@@ -10,9 +10,10 @@ import os
 from os.path import join
 rivet.AnalysisPath = join(os.environ['PWD'], 'rivet')
 
-rivet.Analyses += [ 'tttt_parton', 'tttt_event' , 'tttt_ttH']
+#rivet.Analyses += [ 'tttt_parton', 'tttt_event' , 'tttt_ttH']
+rivet.Analyses += ['ttw_ttH']
 rivet.RunName = ''
-rivet.HistoFile = 'Rivet_tttt.yoda.gz'
+rivet.HistoFile = 'Rivet_ttH.yoda.gz'
 rivet.CrossSection = 1.0
 #rivet.IgnoreBeamCheck = True
 #rivet.SkipWeights=True

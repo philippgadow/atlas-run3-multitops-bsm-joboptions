@@ -12,6 +12,7 @@ git clone --recursive git@github.com:philippgadow/atlas-run3-multitops-bsm-jobop
 source setup.sh
 bash run.sh
 ```
+Arguments can be provided in the following order: DSID, number of events, COM energy (in GeV), random seed, input LHE file. 
 
 ### Batch submission
 On DESY NAF modify `run_batch.sh` to include DSIDs of choice and run:
@@ -24,9 +25,10 @@ bash run_batch.sh
 
 ### Make validation plots
 
-With the generation event, also some rivet subroutines can be launched.
+Some rivet routines are included in this repo. To run, include the desired routines in `rivet.Analyses` in `rivet/rivet.py`. Then run
+```bash run_rivet.sh```
 
-You can plot the results with Rivet:
+To produce only the plots (run this from the directory where the `.yoda` file is found): 
 
 ```bash
 # the setupRivet script is provided to the PATH after AthGeneration was setup, see e.g.

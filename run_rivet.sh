@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # set DSID
 DSID=${1}
 if [[ -z ${DSID} ]]; then
@@ -22,22 +21,24 @@ if [[ -z ${SEED} ]]; then
     SEED=1234;
 fi
 
-# launch job
+# directories
+INITIALDIR=$PWD
 TAG=${DSID}_${COMENERGY/.*}GeV_${SEED}
 RESULTDIR=$PWD/output/$TAG
+INPUTFILE=$RESULTDIR/test_DSID_${DSID}.EVNT.root
 TMPWORKDIR=/tmp/rivet_$TAG
-RIVETDIR=$PWD/rivet/
+
+export RIVET_ANALYSIS_PATH=$RIVET_ANALYSIS_PATH:$PWD/rivet/
 
 rm -rf $TMPWORKDIR && mkdir -p $TMPWORKDIR
+cp rivet/rivet.py $TMPWORKDIR
 cd $TMPWORKDIR
-athena $RIVETDIR/rivet.py --filesInput $RESULTDIR/test_DSID_${DSID}.EVNT.root
 
-ls
-pwd
-cp $TMPWORKDIR/Rivet_tttt.yoda.gz $RESULTDIR/
+athena rivet.py --filesInput ${INPUTFILE}
+
+cp $TMPWORKDIR/Rivet.yoda.gz $RESULTDIR/
 rm -rf $TMPWORKDIR
-cd -
+cd $RESULTDIR
+rivet-mkhtml --errs --no-weights -o rivet_plots Rivet.yoda.gz:Title="Rivet Plots"
 
-
-
-
+cd $INITIALDIR

@@ -5,3 +5,4 @@
 rivet-build Rivettttt_ttH.so plugins/tttt_ttH.cc
 # rivet-build Rivettttt_event.so plugins/tttt_event.cc
 rivet-build Rivetttw_ttH.so plugins/ttw_ttH.cc
+rivet-build RivetttH_parton.so plugins/ttH_parton.cc

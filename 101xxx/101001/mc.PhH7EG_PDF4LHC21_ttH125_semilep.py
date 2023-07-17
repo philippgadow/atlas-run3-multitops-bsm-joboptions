@@ -28,7 +28,7 @@ evgenConfig.keywords    = [ 'SM', 'top', 'Higgs' ]
 evgenConfig.contact     = [ 'elise.maria.le.boulicaut@cern.ch' ]
 evgenConfig.generators  = [ 'Powheg','Herwig7' ]
 evgenConfig.tune        = "H7.1-Default"
-evgenConfig.inputFilesPerJob = 5
+evgenConfig.inputFilesPerJob = 1
 evgenConfig.nEventsPerJob    = 20000
 
 #--------------------------------------------------------------

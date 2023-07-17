@@ -27,8 +27,8 @@ genSeq.Pythia8.Commands += [ 'Powheg:MPIveto = 0' ]
 evgenConfig.description    = 'POWHEG+Pythia8 ttH (dilep) production with A14 NNPDF2.3 tune'
 evgenConfig.keywords       = [ 'SM', 'top', 'Higgs' ]
 evgenConfig.contact        = [ 'elise.maria.le.boulicaut@cern.ch' ]
-evgenConfig.generators     = [ 'Powheg', 'Pythia8', 'EvtGen' ]
-evgenConfig.inputFilesPerJob = 5
+evgenConfig.generators     = [ 'Powheg', 'Pythia8' ]
+evgenConfig.inputFilesPerJob = 1
 evgenConfig.nEventsPerJob    = 20000
 
 #--------------------------------------------------------------

@@ -28,7 +28,7 @@ evgenConfig.keywords    = [ 'SM', 'top', 'Higgs' ]
 evgenConfig.contact     = [ 'elise.maria.le.boulicaut@cern.ch' ]
 evgenConfig.generators  = [ 'Powheg','Herwig7' ]
 evgenConfig.tune        = "H7.1-Default"
-evgenConfig.inputFilesPerJob = 5
+evgenConfig.inputFilesPerJob = 1
 evgenConfig.nEventsPerJob    = 20000
 
 #--------------------------------------------------------------
@@ -38,6 +38,3 @@ evgenConfig.nEventsPerJob    = 20000
 include('GeneratorFilters/TTbarWToLeptonFilter.py')
 filtSeq.TTbarWToLeptonFilter.NumLeptons = 2 #(-1: non-all had, 0: all had, 1: l+jets, 2: dilepton)
 filtSeq.TTbarWToLeptonFilter.Ptcut = 0.0
-
-
-

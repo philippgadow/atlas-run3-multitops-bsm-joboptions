@@ -25,8 +25,20 @@ fi
 INITIALDIR=$PWD
 TAG=${DSID}_${COMENERGY/.*}GeV_${SEED}
 RESULTDIR=$PWD/output/$TAG
-INPUTFILE=$RESULTDIR/test_DSID_${DSID}.EVNT.root
 TMPWORKDIR=/tmp/rivet_$TAG
+
+# alternatively just provide input file
+INPUTFILE=${4}
+if [[ -z ${INPUTFILE} ]]; then
+    echo "input path not provided, using information from parameters";
+    INPUTFILE=$(readlink -f "$RESULTDIR/test_DSID_${DSID}.EVNT.root"); #get full path
+else
+    INPUTFILE=$(readlink -f "$INPUTFILE") #get full path
+    mkdir -p $RESULTDIR
+fi
+
+echo $I
+
 
 export RIVET_ANALYSIS_PATH=$RIVET_ANALYSIS_PATH:$PWD/rivet/
 

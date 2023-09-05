@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# global settings
+RUNRIVET=1 # set to 0 if you do not wish the run rivet right after evgen.
+MAKERIVETPLOTS=0 # set to 1 if you wish to produce the rivet plots and html files (must have RUNRIVET=1), otherwise set to 0
+RIVETTITLE="tt+X plots" # if using MAKERIVETPLOTS
+
 # enable model
 export PYTHONPATH=$PWD/models:$PYTHONPATH
 
@@ -34,8 +39,7 @@ fi
 # Input LHE file
 INPUTGENFILE=${5}
 if [[ -z ${INPUTGENFILE} ]]; then
-    echo "input generator file not provided, using TXT.29916609._000001.tar.gz.1 as default.";
-    INPUTGENFILE="TXT.29916609._000001.tar.gz.1";
+    echo "input generator file not provided, running without it.";
 fi
 
 # launch job
@@ -50,19 +54,45 @@ mkdir -p $RESULTDIR
 rm -rf $TMPWORKDIR && mkdir -p $TMPWORKDIR
 cp -r ${DSID:0:3}xxx/$DSID $TMPWORKDIR/
 cp -r mcjoboptions/${DSID:0:3}xxx/$DSID $TMPWORKDIR/ 
-cp -r ${INPUTGENFILE} $TMPWORKDIR/
+cp rivet/rivet.py $TMPWORKDIR
+if [[ -f "${INPUTGENFILE}" ]]; then
+  cp -r ${INPUTGENFILE} $TMPWORKDIR/
+fi
 cd $TMPWORKDIR
 
-Gen_tf.py --firstEvent=1 --maxEvents=$NEVENTS --ecmEnergy=$COMENERGY --randomSeed=$SEED \
---jobConfig=${DSID} --outputEVNTFile=test_DSID_${DSID}.EVNT.root \
---inputGeneratorFile=${INPUTGENFILE} 
-# --rivetAnas=tttt_parton,tttt_event
-# --rivetAnas=MC_FSPARTICLES,MC_JETS,MC_ELECTRONS,MC_MUONS
+# Run event generation
+COMMAND="Gen_tf.py --firstEvent=1 --maxEvents=$NEVENTS --ecmEnergy=$COMENERGY --randomSeed=$SEED \
+  --jobConfig=${DSID} --outputEVNTFile=test_DSID_${DSID}.EVNT.root"
+if [[ -f "${INPUTGENFILE}" ]]; then
+   COMMAND+=" --inputGeneratorFile=${INPUTGENFILE}"
+fi
+$COMMAND
+
+# Run rivet
+if [[ $RUNRIVET -eq 1 ]]; then
+    rm PoolFileCatalog.xml
+    athena rivet.py --filesInput test_DSID_${DSID}.EVNT.root
+    cp Rivet.yoda.gz $RESULTDIR/
+fi 
+
+# Diagnostics
 ls
 pwd
+
+# copy results over
 cp $TMPWORKDIR/test_DSID_${DSID}.EVNT.root $RESULTDIR/
 cp $TMPWORKDIR/Rivet.yoda $RESULTDIR/
 cat log.generate
 cp $TMPWORKDIR/log.generate $RESULTDIR/
 rm -rf $TMPWORKDIR
 cd -
+
+# Generate the rivet plots
+if [[ $MAKERIVETPLOTS -eq 1 ]]; then
+    cd $RESULTDIR
+    rivet-mkhtml --errs --no-weights -o rivet_plots Rivet.yoda.gz:Title=$RIVETTITLE
+    cd -
+fi
+
+
+rivet-mkhtml ../../output/101005_13000GeV_339786//Rivet.yoda.gz:'ttWZ (mc20)' ../../output/101005_13600GeV_412724/Rivet.yoda.gz:'ttWZ(mc23)' ../../output/500463_13000GeV_1234/Rivet.yoda.gz:'ttWZ (mc16)'

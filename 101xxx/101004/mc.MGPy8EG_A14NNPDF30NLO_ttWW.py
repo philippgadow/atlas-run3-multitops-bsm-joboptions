@@ -6,8 +6,8 @@ keyword=['SM','top','ttVV']
 lhe_version = 3.0
 
 # safe factor to generate sufficient events for filter
-maxEvents = runArgs.maxEvents
-runArgs.maxEvents *= 5
+evgenConfig.nEventsPerJob = 2000
+nevents = runArgs.maxEvents*5.0 if runArgs.maxEvents>0 else 5.0*evgenConfig.nEventsPerJob
 
 #---------------------------------------------------------------------------------------------------                                               
 # Define MadGraph process                                                                                                                                 
@@ -34,7 +34,10 @@ import MadGraphControl.MadGraph_NNPDF30NLO_Base_Fragment
 # Define run card                                                                                                                                   
 #---------------------------------------------------------------------------------------------------                                               
 
-extras = { 'lhe_version'  : lhe_version }
+extras = {
+    'lhe_version'  : lhe_version,
+    'nevents': int(nevents),
+}
 modify_run_card(process_dir=process_dir, runArgs=runArgs, settings=extras)
 
 #---------------------------------------------------------------------------------------------------                                               
@@ -49,7 +52,6 @@ arrange_output(process_dir=process_dir, runArgs=runArgs, lhe_version=lhe_version
 # Storing information and post-processing with parton shower                                                                                                                            
 #---------------------------------------------------------------------------------------------------   
 
-runArgs.maxEvents = maxEvents
 evgenConfig.description = 'MadGraph_'+str(name)
 evgenConfig.keywords+=keyword 
 evgenConfig.contact = ["Philipp Gadow <paul.philipp.gadow@cern.ch>"]

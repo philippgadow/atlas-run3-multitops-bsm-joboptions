@@ -2,8 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Change these if running on a different sample
-path = "./output/101005_13000GeV_339786/rivet_plots/ttX_ttVV/"
-particle = "Z"
+path = "./output/101004_13000GeV_232718/rivet_plots/ttX_ttVV/"
+particle = "W"
 title=particle + " branching ratios"
 
 if particle == "W":

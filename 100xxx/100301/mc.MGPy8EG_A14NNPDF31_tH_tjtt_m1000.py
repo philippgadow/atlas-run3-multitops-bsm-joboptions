@@ -1,8 +1,8 @@
-import MadGraphControl.MadGraph_NNPDF30NLOnf4_Base_Fragment
+import MadGraphControl.MadGraph_NNPDF30NLO_Base_Fragment
 from MadGraphControl.MadGraphParamHelpers import set_top_params
 from MadGraphControl.MadGraphUtils import *
 
-str_param_card='MadGraph_2HDM_for_multitops_paramcard_400_new.dat'
+str_param_card='MadGraph_2HDM_for_multitops_paramcard_1000_nobmass.dat'
 
 # Safe factor for events
 nevents=int(8.0*runArgs.maxEvents)
@@ -11,18 +11,21 @@ is_four_flavour_scheme = False
 #---------------------------------------------------------------------------
 # MG5 Proc card
 #---------------------------------------------------------------------------
-
 process_string = """
 set group_subprocesses Auto
 set ignore_six_quark_processes False
 set loop_optimized_output True
 set gauge unitary
 set complex_mass_scheme False
-import model sm
+import model sm-no_b_mass
 define p = g u c d s u~ c~ d~ s~
+define j = p
 define wdec = e+ mu+ ta+ e- mu- ta- ve vm vt ve~ vm~ vt~ g u c d s b u~ c~ d~ s~ b~
-import model 2HDMtypeII 
-generate p p > t t~ h2, (h2 > t t~, (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)
+import model 2HDMtypeII-nobmass
+define p = p b b~
+define j = p
+generate p p > t j h2, (h2 > t t~, (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)), (t > b w+, w+ > wdec wdec)
+add process p p > t~ j h2, (h2 > t t~, (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)), (t~ > b~ w-, w- > wdec wdec) 
 output -f"""
 
 #---------------------------------------------------------------------------
@@ -32,7 +35,9 @@ output -f"""
 #Fetch default LO run_card.dat and set parameters
 extras = { 'lhe_version':'3.0',
            'cut_decays':'F',
-           'nevents' : nevents}
+           'nevents' : nevents,
+           'maxjetflavor': 5,
+           'asrwgtflavor': 5}
 
 process_dir = new_process(process_string)
 modify_run_card(runArgs=runArgs,
@@ -63,7 +68,7 @@ check_reset_proc_number(opts)
 
 evgenConfig.generators  += [ "MadGraph"] 
 evgenConfig.description = 'MadGraph_tttt'
-evgenConfig.process= "p p ->t+t~+h2 -> t+t~+t+t~"
+evgenConfig.process= "p p ->t+j+h2 -> t+j+t+t~"
 evgenConfig.keywords+=['Higgs','jets']
 evgenConfig.contact = ["philipp.gadow@cern.ch"]
 

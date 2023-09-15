@@ -55,7 +55,8 @@ rivet-mkhtml --errs --no-weights  -o my_plots output/100400_13000GeV_372777/Rive
 | 100200 | ttH restt    | 400  | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
 | 100300 | tjH 5FS      | 400  | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
 | 100400 | tWH 5FS      | 400  | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-
+| 100500 | tjH 4FS      | 400  | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
+| 100600 | tWH 4FS      | 400  | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
 
 ### Backgrounds
 

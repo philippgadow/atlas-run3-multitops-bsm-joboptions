@@ -6,12 +6,11 @@ str_param_card='MadGraph_2HDM_for_multitops_paramcard_400_new.dat'
 
 # Safe factor for events
 nevents=int(8.0*runArgs.maxEvents)
-is_four_flavour_scheme = False
+is_four_flavour_scheme = True
 
 #---------------------------------------------------------------------------
 # MG5 Proc card
 #---------------------------------------------------------------------------
-
 process_string = """
 set group_subprocesses Auto
 set ignore_six_quark_processes False
@@ -20,9 +19,12 @@ set gauge unitary
 set complex_mass_scheme False
 import model sm
 define p = g u c d s u~ c~ d~ s~
+define j = p
 define wdec = e+ mu+ ta+ e- mu- ta- ve vm vt ve~ vm~ vt~ g u c d s b u~ c~ d~ s~ b~
-import model 2HDMtypeII 
-generate p p > t t~ h2, (h2 > t t~, (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)
+define bottom = b b~
+import model 2HDMtypeII
+generate p p > t j h2 bottom, (h2 > t t~, (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)), (t > b w+, w+ > wdec wdec)
+add process p p > t~ j h2 bottom, (h2 > t t~, (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)), (t~ > b~ w-, w- > wdec wdec) 
 output -f"""
 
 #---------------------------------------------------------------------------
@@ -63,7 +65,7 @@ check_reset_proc_number(opts)
 
 evgenConfig.generators  += [ "MadGraph"] 
 evgenConfig.description = 'MadGraph_tttt'
-evgenConfig.process= "p p ->t+t~+h2 -> t+t~+t+t~"
+evgenConfig.process= "p p ->t+j~+h2 -> t+j+t+t~"
 evgenConfig.keywords+=['Higgs','jets']
 evgenConfig.contact = ["philipp.gadow@cern.ch"]
 

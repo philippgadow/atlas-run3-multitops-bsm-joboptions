@@ -2,7 +2,7 @@ import MadGraphControl.MadGraph_NNPDF30NLOnf4_Base_Fragment
 from MadGraphControl.MadGraphParamHelpers import set_top_params
 from MadGraphControl.MadGraphUtils import *
 
-str_param_card='MadGraph_2HDM_for_multitops_paramcard_400_new.dat'
+str_param_card='MadGraph_2HDM_for_multitops_paramcard_1000_new.dat'
 
 # Safe factor for events
 nevents=int(8.0*runArgs.maxEvents)

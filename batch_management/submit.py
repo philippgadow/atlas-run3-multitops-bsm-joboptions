@@ -18,7 +18,8 @@ parser.add_argument(
     help="Center of mass energy(s) default: [13_600., 13_000.]",
     type=float,
     nargs="+",
-    default=[13_600., 13_000.],
+    # default=[13_600., 13_000.],
+    default=[13_000.],
 )
 args = parser.parse_args()
 
@@ -30,7 +31,7 @@ for item in [batch_path, log_path]:
     if not os.path.exists(item): os.makedirs(item)
 
 handler = CondorHandler(batch_path, log_path)
-handler['runtime'] = 28_799 # in seconds (7200 = 2h, 28_800 = 8h)
+handler['runtime'] = 43_200 # in seconds (7200 = 2h, 28_800 = 8h, 43_200 = 12h)
 handler['memory'] = "4GB"
 handler['cpu'] = 1
 handler['project'] = "af-atlas"

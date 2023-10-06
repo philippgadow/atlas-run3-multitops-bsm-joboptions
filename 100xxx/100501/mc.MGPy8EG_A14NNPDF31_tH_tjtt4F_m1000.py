@@ -21,10 +21,9 @@ import model sm
 define p = g u c d s u~ c~ d~ s~
 define j = p
 define wdec = e+ mu+ ta+ e- mu- ta- ve vm vt ve~ vm~ vt~ g u c d s b u~ c~ d~ s~ b~
-define bottom = b b~
 import model 2HDMtypeII
-generate p p > t j h2 bottom, (h2 > t t~, (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)), (t > b w+, w+ > wdec wdec)
-add process p p > t~ j h2 bottom, (h2 > t t~, (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)), (t~ > b~ w-, w- > wdec wdec) 
+generate p p > t j h2 b~, (h2 > t t~, (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)), (t > b w+, w+ > wdec wdec)
+add process p p > t~ j h2 b, (h2 > t t~, (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)), (t~ > b~ w-, w- > wdec wdec) 
 output -f"""
 
 #---------------------------------------------------------------------------

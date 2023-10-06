@@ -10,8 +10,8 @@ import os
 from os.path import join
 rivet.AnalysisPath = join(os.environ['TestArea'], '..', 'rivet')
 
-#rivet.Analyses += [ 'tttt_parton', 'tttt_event' , 'tttt_ttH']
-rivet.Analyses += ['ttX_ttVV']
+rivet.Analyses += [ 'tttt_ttH' ] # 'tttt_parton', 'tttt_event' , 
+#rivet.Analyses += ['ttX_ttVV']
 rivet.RunName = ''
 rivet.HistoFile = 'Rivet.yoda.gz'
 rivet.CrossSection = 1.0

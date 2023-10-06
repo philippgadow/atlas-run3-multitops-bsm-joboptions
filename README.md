@@ -52,11 +52,21 @@ rivet-mkhtml --errs --no-weights  -o my_plots output/100400_13000GeV_372777/Rive
 
 | DSID   | process      | mass | width | tan beta | decay chain                      |
 | ------ | ------------ | ---- | ----- | -------- | -------------------------------- |
-| 100200 | ttH restt    | 400  | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-| 100300 | tjH 5FS      | 400  | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
+| 100200 | ttH restt    |  400 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
+| 100201 | ttH restt    | 1000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
+| 100202 | ttH restt    | 2000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
+| 100300 | tjH 5FS      |  400 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
+| 100301 | tjH 5FS      | 1000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
+| 100302 | tjH 5FS      | 2000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
 | 100400 | tWH 5FS      | 400  | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-| 100500 | tjH 4FS      | 400  | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-| 100600 | tWH 4FS      | 400  | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
+| 100401 | tWH 5FS      | 1000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
+| 100402 | tWH 5FS      | 2000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
+| 100500 | tjH 4FS      |  400 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
+| 100501 | tjH 4FS      | 1000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
+| 100502 | tjH 4FS      | 2000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
+| 100600 | tWH 4FS      |  400 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
+| 100601 | tWH 4FS      | 1000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
+| 100602 | tWH 4FS      | 2000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
 
 ### Backgrounds
 

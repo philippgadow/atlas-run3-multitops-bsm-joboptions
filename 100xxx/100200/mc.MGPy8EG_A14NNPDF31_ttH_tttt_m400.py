@@ -1,4 +1,4 @@
-import MadGraphControl.MadGraph_NNPDF30NLOnf4_Base_Fragment
+import MadGraphControl.MadGraph_NNPDF30NLO_Base_Fragment
 from MadGraphControl.MadGraphParamHelpers import set_top_params
 from MadGraphControl.MadGraphUtils import *
 

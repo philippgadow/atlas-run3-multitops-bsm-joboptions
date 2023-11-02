@@ -1,5 +1,4 @@
 import MadGraphControl.MadGraph_NNPDF30NLOnf4_Base_Fragment
-from MadGraphControl.MadGraphParamHelpers import set_top_params
 from MadGraphControl.MadGraphUtils import *
 
 str_param_card='MadGraph_2HDM_for_multitops_paramcard_400_new.dat'
@@ -22,8 +21,8 @@ define p = g u c d s u~ c~ d~ s~
 define j = p
 define wdec = e+ mu+ ta+ e- mu- ta- ve vm vt ve~ vm~ vt~ g u c d s b u~ c~ d~ s~ b~
 import model 2HDMtypeII
-generate p p > t j h2 b~, (h2 > t t~, (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)), (t > b w+, w+ > wdec wdec)
-add process p p > t~ j h2 b, (h2 > t t~, (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)), (t~ > b~ w-, w- > wdec wdec) 
+generate p p > t j h2 b~ $$ w+ w-, (h2 > t t~, (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)), (t > b w+, w+ > wdec wdec)
+add process p p > t~ j h2 b $$ w+ w-, (h2 > t t~, (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)), (t~ > b~ w-, w- > wdec wdec) 
 output -f"""
 
 #---------------------------------------------------------------------------
@@ -41,7 +40,6 @@ modify_run_card(runArgs=runArgs,
                 settings=extras)
 
 modify_param_card(param_card_input=str_param_card,process_dir=process_dir)
-set_top_params(process_dir,mTop=172.5,FourFS=is_four_flavour_scheme)
 
 print_cards()
 

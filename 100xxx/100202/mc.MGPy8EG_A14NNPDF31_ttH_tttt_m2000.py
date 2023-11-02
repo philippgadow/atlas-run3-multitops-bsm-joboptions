@@ -1,12 +1,10 @@
-import MadGraphControl.MadGraph_NNPDF30NLO_Base_Fragment
-from MadGraphControl.MadGraphParamHelpers import set_top_params
+import MadGraphControl.MadGraph_NNPDF30NLOnf4_Base_Fragment
 from MadGraphControl.MadGraphUtils import *
 
 str_param_card='MadGraph_2HDM_for_multitops_paramcard_2000_new.dat'
 
 # Safe factor for events
 nevents=int(8.0*runArgs.maxEvents)
-is_four_flavour_scheme = False
 
 #---------------------------------------------------------------------------
 # MG5 Proc card
@@ -40,7 +38,6 @@ modify_run_card(runArgs=runArgs,
                 settings=extras)
 
 modify_param_card(param_card_input=str_param_card,process_dir=process_dir)
-set_top_params(process_dir,mTop=172.5,FourFS=is_four_flavour_scheme)
 
 print_cards()
 

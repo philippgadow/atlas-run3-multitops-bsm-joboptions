@@ -100,7 +100,7 @@ import MadGraphControl.MadGraph_NNPDF30NLO_Base_Fragment
 
 extras = {'auto_ptj_mjj':'False',
           'maxjetflavor':'5',
-          'event_norm':'sum',
+          'event_norm':'average',
           'cut_decays':'F', 
           'dynamical_scale_choice':3,
           }
@@ -113,7 +113,6 @@ if process_id in ['tttt', 'ttttsm']:
 
 parameters = {
     'mass':{
-        'MB': 0.,
         'Mv1': mass,
     },
     'decay':{
@@ -164,12 +163,16 @@ modify_run_card(process_dir=process_dir, runArgs=runArgs, settings=extras)
 #---------------------------------------------------------------------------------------------------                                               
 modify_param_card(process_dir=process_dir, params={k:v for (k,v) in parameters.items()})
 
+# apply PMG settings for top quark and SM particles
+from MadGraphControl.MadGraphParamHelpers import set_top_params
+mtop=172.5
+set_top_params(process_dir=process_dir, mTop=mtop,FourFS=False)
+
 #---------------------------------------------------------------------------------------------------                                               
 # Add reweight card, therefore allowing for scans of theta1 and ct1
 #---------------------------------------------------------------------------------------------------                
 
-def compute_width(mass, ct, theta):
-  mtop = 173.1 # GeV
+def compute_width(mass, ct, theta, mtop=172.5):
   return (ct**2 * mass / (8 * pi)) * \
          sqrt(1 - ((4 * mtop**2) / (mass**2))) * \
          (1 - ((mtop**2) / (mass**2)) * (1 - 3 * sin(2 * theta)))
@@ -186,7 +189,7 @@ if reweight:
     )
     reweightCommand += "set v0params 1 {ct1}\n".format(ct1=i_ct1)
     reweightCommand += "set v1params 1 {theta1}\n".format(theta1=i_theta1)
-    width = compute_width(mass, i_ct1, i_theta1)
+    width = compute_width(mass, i_ct1, i_theta1, mtop)
     reweightCommand += "set decay 6000055 {width}\n\n".format(width=width)
 
   rcard = open(os.path.join(process_dir,'Cards', 'reweight_card.dat'), 'w')
@@ -200,17 +203,28 @@ print_cards()
 generate(process_dir=process_dir, runArgs=runArgs)
 arrange_output(process_dir=process_dir, runArgs=runArgs, lhe_version=lhe_version)
 
-#---------------------------------------------------------------------------------------------------                                               
-# Storing information and post-processing with parton shower                                                                                                                            
-#---------------------------------------------------------------------------------------------------   
+#--------------------------------------------------------------
+# Storing information                                                                                                                  
+#--------------------------------------------------------------
 # Some more information
 evgenConfig.description = process_ids[process_id]
 evgenConfig.keywords = ["exotic", "BSM", "RandallSundrum", "warpedED"]
 evgenConfig.contact = ["James Ferrando <james.ferrando@desy.de>", "Philipp Gadow <paul.philipp.gadow@cern.ch>"]
 evgenConfig.process = "pp>ttv1>tttt"  # e.g. pp>G*>WW>qqqq
 
+#--------------------------------------------------------------
+# Parton shower                                                                                                                  
+#--------------------------------------------------------------
 # Finally, run the parton shower...
 include("Pythia8_i/Pythia8_A14_NNPDF23LO_EvtGen_Common.py")
 
 # ...and pull in MadGraph-specific stuff
 include("Pythia8_i/Pythia8_MadGraph.py")
+
+#--------------------------------------------------------------
+# Event filter
+#--------------------------------------------------------------
+# Semi-leptonic decay filter
+include('GeneratorFilters/TTbarWToLeptonFilter.py')
+filtSeq.TTbarWToLeptonFilter.NumLeptons = -1 #no-allhad
+filtSeq.TTbarWToLeptonFilter.Ptcut = 0.

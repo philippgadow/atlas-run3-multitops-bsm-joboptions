@@ -17,11 +17,6 @@
 #include "Rivet/Projections/VisibleFinalState.hh"
 #include "Rivet/Tools/RivetMT2.hh"
 
-#include "HepMC3/GenEvent.h"
-#include "HepMC3/GenParticle.h"
-#include "HepMC3/ReaderAscii.h"
-// #include "HepMC3/HepMCUtils.h"
-
 
 namespace Rivet {
 
@@ -68,69 +63,51 @@ namespace Rivet {
         book(_h["sumOfWeights"],"sumOfWeights",2,0,2);
 
         book(_h["Inclusive_nTop"],"Inclusive_nTop",5,0.5,5.5);
-        book(_h["Inclusive_nH"],"Inclusive_nH",4,-0.5,3.5);
-        book(_h["Inclusive_nTop_FromNonH_allevents"],"Inclusive_nTop_FromNonH_allevents",5,-0.5,4.5);
-        book(_h["Inclusive_nTop_FromH_allevents"],"Inclusive_nTop_FromH_allevents",5,-0.5,4.5);
 
-        book(_h["Inclusive_nTop_FromNonH"],"Inclusive_nTop_FromNonH",5,-0.5,4.5);
-        book(_h["Inclusive_nTop_FromH"],"Inclusive_nTop_FromH",5,-0.5,4.5);
+        book(_h["Inclusive_InvM_400"],"Inclusive_InvM_400",20,300,500);
+        book(_h["Inclusive_InvM_500"],"Inclusive_InvM_500",20,400,600);
+        book(_h["Inclusive_InvM_600"],"Inclusive_InvM_600",20,500,700);
+        book(_h["Inclusive_InvM_700"],"Inclusive_InvM_700",20,600,800);
+        book(_h["Inclusive_InvM_800"],"Inclusive_InvM_800",20,700,900);
+        book(_h["Inclusive_InvM_900"],"Inclusive_InvM_900",20,800,1000);
+        book(_h["Inclusive_InvM_1000"],"Inclusive_InvM_1000",20,900,1100);
+        book(_h["Inclusive_InvM_1100"],"Inclusive_InvM_1100",20,1000,1200);
+        book(_h["Inclusive_InvM_1200"],"Inclusive_InvM_1200",20,1100,1300);
+        book(_h["Inclusive_InvM_1250"],"Inclusive_InvM_1250",20,1150,1350);
+        book(_h["Inclusive_InvM_1300"],"Inclusive_InvM_1300",20,1200,1400);
+        book(_h["Inclusive_InvM_1400"],"Inclusive_InvM_1400",20,1300,1500);
+        book(_h["Inclusive_InvM_1500"],"Inclusive_InvM_1500",20,1400,1600);
+        book(_h["Inclusive_InvM_1600"],"Inclusive_InvM_1600",20,1500,1700);
+        book(_h["Inclusive_InvM_1700"],"Inclusive_InvM_1700",20,1600,1800);
+        book(_h["Inclusive_InvM_1800"],"Inclusive_InvM_1800",20,1700,1900);
+        book(_h["Inclusive_InvM_1900"],"Inclusive_InvM_1900",20,1800,2000);
+        book(_h["Inclusive_InvM_2000"],"Inclusive_InvM_2000",20,1900,2100);
+        book(_h["Inclusive_InvM_2100"],"Inclusive_InvM_2100",20,2000,2200);
+        book(_h["Inclusive_InvM_2200"],"Inclusive_InvM_2200",20,2100,2300);
+        book(_h["Inclusive_InvM_2300"],"Inclusive_InvM_2300",20,2200,2400);
+        book(_h["Inclusive_InvM_2400"],"Inclusive_InvM_2400",20,2300,2500);
+        book(_h["Inclusive_InvM_2500"],"Inclusive_InvM_2500",20,2400,2600);
+        book(_h["Inclusive_InvM_2600"],"Inclusive_InvM_2600",20,2500,2700);
+        book(_h["Inclusive_InvM_2700"],"Inclusive_InvM_2700",20,2600,2800);
+        book(_h["Inclusive_InvM_2800"],"Inclusive_InvM_2800",20,2700,2900);
+        book(_h["Inclusive_InvM_2900"],"Inclusive_InvM_2900",20,2800,3000);
+        book(_h["Inclusive_InvM_3000"],"Inclusive_InvM_3000",20,2900,3100);
 
-        book(_h["Inclusive_mH"],"Inclusive_mH",870,150,4500);
-        book(_h["Inclusive_mH_zoomin"],"Inclusive_mH_zoomin",1740,150,4500);
+        book(_h["Inclusive_InvM_ttbar12"],"Inclusive_InvM_ttbar12",870,150,4500);
+        book(_h["Inclusive_pT_ttbar12"],"Inclusive_pT_ttbar12",25,0,1000);
+        book(_h["Inclusive_dR_ttbar12"],"Inclusive_dR_ttbar12",20,0,5);
+        book(_h["Inclusive_mTop1"],"Inclusive_mTop1",25,150,200);
+        book(_h["Inclusive_mTop2"],"Inclusive_mTop2",25,150,200);
+        book(_h["Inclusive_mTop1_zoomin"],"Inclusive_mTop1_zoomin",40,165,175);
+        book(_h["Inclusive_mTop2_zoomin"],"Inclusive_mTop2_zoomin",40,165,175);
 
-        book(_h["Inclusive_mH400"],"Inclusive_mH400",20,300,500);
-        book(_h["Inclusive_mH500"],"Inclusive_mH500",20,400,600);
-        book(_h["Inclusive_mH600"],"Inclusive_mH600",20,500,700);
-        book(_h["Inclusive_mH700"],"Inclusive_mH700",20,600,800);
-        book(_h["Inclusive_mH800"],"Inclusive_mH800",20,700,900);
-        book(_h["Inclusive_mH900"],"Inclusive_mH900",20,800,1000);
-        book(_h["Inclusive_mH1000"],"Inclusive_mH1000",20,900,1100);
-        book(_h["Inclusive_mH1250"],"Inclusive_mH1250",20,1150,1350);
-        book(_h["Inclusive_mH1500"],"Inclusive_mH1500",20,1400,1600);
-        book(_h["Inclusive_mH2000"],"Inclusive_mH2000",20,1900,2100);
-        book(_h["Inclusive_mH2500"],"Inclusive_mH2500",20,2400,2600);
-        book(_h["Inclusive_mH3000"],"Inclusive_mH3000",20,2900,3100);
-        book(_h["Inclusive_mH1500_largewidth"],"Inclusive_mH1500_largewidth",20,900,2000);
-        book(_h["Inclusive_mH2000_largewidth"],"Inclusive_mH2000_largewidth",20,1500,2500);
-        book(_h["Inclusive_mH2500_largewidth"],"Inclusive_mH2500_largewidth",20,2000,3000);
-        book(_h["Inclusive_mH3000_largewidth"],"Inclusive_mH3000_largewidth",20,2500,3500);
-
-        book(_h["Inclusive_pT_H"],"Inclusive_pT_H",25,0,1000);
-        book(_h["Inclusive_pT_ttbar_FromH"],"Inclusive_pT_ttbar_FromH",25,0,1000);
-
-        book(_h["Inclusive_mTop1_FromH"],"Inclusive_mTop1_FromH",25,150,200);
-        book(_h["Inclusive_mTop2_FromH"],"Inclusive_mTop2_FromH",25,150,200);
-        book(_h["Inclusive_mTop1_zoomin_FromH"],"Inclusive_mTop1_zoomin_FromH",40,165,175);
-        book(_h["Inclusive_mTop2_zoomin_FromH"],"Inclusive_mTop2_zoomin_FromH",40,165,175);
-        book(_h["Inclusive_dR_ttbar_FromH"],"Inclusive_dR_ttbar_FromH",20,0,5);
-
-        book(_h["Inclusive_InvM_FromH"],"Inclusive_InvM_FromH",870,150,4500);
-        book(_h["Inclusive_InvM_FromH_zoomin"],"Inclusive_InvM_FromH_zoomin",1740,150,4500);
-
-        book(_h["Inclusive_pToverInv_ttbar_FromH"],"Inclusive_pToverInv_ttbar_FromH",25,0,2);
-
-        book(_h["Inclusive_InvM_FromH400"],"Inclusive_InvM_FromH400",20,300,500);
-        book(_h["Inclusive_InvM_FromH500"],"Inclusive_InvM_FromH500",20,400,600);
-        book(_h["Inclusive_InvM_FromH600"],"Inclusive_InvM_FromH600",20,500,700);
-        book(_h["Inclusive_InvM_FromH700"],"Inclusive_InvM_FromH700",20,600,800);
-        book(_h["Inclusive_InvM_FromH800"],"Inclusive_InvM_FromH800",20,700,900);
-        book(_h["Inclusive_InvM_FromH900"],"Inclusive_InvM_FromH900",20,800,1000);
-        book(_h["Inclusive_InvM_FromH1000"],"Inclusive_InvM_FromH1000",20,900,1100);
-        book(_h["Inclusive_InvM_FromH1250"],"Inclusive_InvM_FromH1250",20,1150,1350);
-        book(_h["Inclusive_InvM_FromH1500"],"Inclusive_InvM_FromH1500",20,1400,1600);
-        book(_h["Inclusive_InvM_FromH2000"],"Inclusive_InvM_FromH2000",20,1900,2100);
-        book(_h["Inclusive_InvM_FromH2500"],"Inclusive_InvM_FromH2500",20,2400,2600);
-        book(_h["Inclusive_InvM_FromH3000"],"Inclusive_InvM_FromH3000",20,2900,3100);
-
-        book(_h["Inclusive_pT_ttbar_FromNonH"],"Inclusive_pT_ttbar_FromNonH",20,0,600);
-        book(_h["Inclusive_mTop1_FromNonH"],"Inclusive_mTop1_FromNonH",25,150,200);
-        book(_h["Inclusive_mTop2_FromNonH"],"Inclusive_mTop2_FromNonH",25,150,200);
-        book(_h["Inclusive_mTop1_zoomin_FromNonH"],"Inclusive_mTop1_zoomin_FromNonH",40,165,175);
-        book(_h["Inclusive_mTop2_zoomin_FromNonH"],"Inclusive_mTop2_zoomin_FromNonH",40,165,175);
-        book(_h["Inclusive_dR_ttbar_FromNonH"],"Inclusive_dR_ttbar_FromNonH",20,0,5);
-
-        book(_h["Inclusive_pToverInv_ttbar_FromNonH"],"Inclusive_pToverInv_ttbar_FromNonH",25,0,3);
-        book(_h["Inclusive_InvM_FromNonH"],"Inclusive_InvM_FromNonH",40,0,1800);
+        book(_h["Inclusive_InvM_ttbar34"],"Inclusive_InvM_ttbar34",870,150,4500);
+        book(_h["Inclusive_pT_ttbar34"],"Inclusive_pT_ttbar34",20,0,600);
+        book(_h["Inclusive_dR_ttbar34"],"Inclusive_dR_ttbar34",20,0,5);
+        book(_h["Inclusive_mTop3"],"Inclusive_mTop3",25,150,200);
+        book(_h["Inclusive_mTop4"],"Inclusive_mTop4",25,150,200);
+        book(_h["Inclusive_mTop3_zoomin"],"Inclusive_mTop3_zoomin",40,165,175);
+        book(_h["Inclusive_mTop4_zoomin"],"Inclusive_mTop4_zoomin",40,165,175);
     }
 
 
@@ -142,10 +119,9 @@ namespace Rivet {
       // MSG_INFO("#----------------Event--------------#");
 
       //DO PDG analysis
-      vector<std::shared_ptr<const HepMC3::GenParticle>> genParticles = HepMCUtils::particles(event.genEvent());
+      vector<const HepMC::GenParticle*> genParticles = HepMCUtils::particles(event.genEvent());
 
-      Particles HCands;
-      Particles topCands,topCandsFromH,topCandsFromNonH;
+      Particles topCands;
 
       for (ConstGenParticlePtr part : HepMCUtils::particles(event.genEvent()))
       {
@@ -158,7 +134,7 @@ namespace Rivet {
                       if(debug){
                           std::cout <<"production Top: "<< part->pdg_id()
                                      << ", status: " <<  part->status()
-                                     << ", barcode: " << part->id()
+                                     << ", barcode: " << part->barcode()
                                     <<std::endl;
                           std::cout << "pt: " <<  part->momentum().perp()
                                     << ", eta: " <<  part->momentum().eta()
@@ -170,230 +146,122 @@ namespace Rivet {
                           std::cout << "------------------"<<std::endl;
                       }
 
-                      // append W candidates
+                      // append top candidates
                       topCands.push_back(Particle(part));
-
-                      if (!( part->production_vertex() && ( hasParent(part,35) || hasParent(part,36) ) ) ) {
-                          topCandsFromNonH.push_back(Particle(part));
-                      }
-
-
                     }
-
               }
-
-              //Select heavy higgs bosons
-              if((fabs(part->pdg_id())==35||fabs(part->pdg_id())==36)&&Particle(part).children().size())
-              {
-
-                    if ( part->production_vertex() && !hasParent(part, part->pdg_id()) && Particle(part).children().size()>0 )
-                    {
-                     if(debug){
-                      std::cout <<"production Heavy Higgs: "<< part->pdg_id()
-                                   << ", status: " <<  part->status()
-                                   << ", barcode: " << part->id()
-                                  <<std::endl;
-                      std::cout << "pt: " <<  part->momentum().perp()
-                                << ", eta: " <<  part->momentum().eta()
-                                << ", phi: " <<  part->momentum().phi()
-                               <<std::endl;
-                      std::cout <<"Heavy Higgs parent number: "<< Particle(part).parents().size()
-                                << ", children number: " << Particle(part).children().size()
-                               <<std::endl;
-                      std::cout << "------------------"<<std::endl;
-                     }
-                      HCands.push_back(Particle(part));
-                    }
-
-              }
-          // }
       }
 
       // MSG_INFO("Number of W boson : "   << wCands.size());
-      _h["Inclusive_nH"]->fill(HCands.size());
       _h["Inclusive_nTop"]->fill(topCands.size());
 
-      _h["Inclusive_nTop_FromNonH_allevents"]->fill(topCandsFromNonH.size());
+      sortByPt(topCands);
 
-      if (HCands.size()==1){
-        _h["Inclusive_nTop_FromNonH"]->fill(topCandsFromNonH.size());
-      }
-      else{
-        _h["Inclusive_nTop_FromNonH"]->fill(-999);
-      }
+      if ( topCands.size() > 1 ){
+        double InvM_ttbar12 = (topCands.at(0).momentum() + topCands.at(1).momentum() ).mass()/GeV;
+        double pT_ttbar12 = (topCands.at(0).momentum() + topCands.at(1).momentum()).pT()/GeV;
+        double dR_ttbar12 = fabs(deltaR(topCands.at(0),topCands.at(1)));
 
-
-
-      for(const Particle &Higgs: HCands){
-        if (debug){
-            MSG_INFO("HCands id = " << Higgs.pid() << ", HCands barcode = " << Higgs.genParticle()->id() << ", HCands status = " << Higgs.genParticle()->status());
-        }
-
-        //check top decay chain
-        Particle Higgs_to_decay = getLastInstance(Higgs);
-        for(const Particle &Higgs_c: Higgs_to_decay.children()){
-         if (debug) {
-            MSG_INFO ( "HCands child id = " << Higgs_c.pid() << ", HCands child barcode = " << Higgs_c.genParticle()->id() << ", HCands child status = " << Higgs_c.genParticle()->status());
-          }
-          if(fabs(Higgs_c.pid()) == 6)
-           {
-               topCandsFromH.push_back(Higgs_c);
-           }
-        }
-        if (debug) MSG_INFO ( "\n");
-
-      }
-
-      if (HCands.size()==1){
-        _h["Inclusive_pT_H"]->fill(HCands.at(0).pT());
-        _h["Inclusive_mH"]->fill(HCands.at(0).mass());
-        _h["Inclusive_mH_zoomin"]->fill(HCands.at(0).mass());
-        _h["Inclusive_mH400"]->fill(HCands.at(0).mass());
-        _h["Inclusive_mH500"]->fill(HCands.at(0).mass());
-        _h["Inclusive_mH600"]->fill(HCands.at(0).mass());
-        _h["Inclusive_mH700"]->fill(HCands.at(0).mass());
-        _h["Inclusive_mH800"]->fill(HCands.at(0).mass());
-        _h["Inclusive_mH900"]->fill(HCands.at(0).mass());
-        _h["Inclusive_mH1000"]->fill(HCands.at(0).mass());
-        _h["Inclusive_mH1250"]->fill(HCands.at(0).mass());
-        _h["Inclusive_mH1500"]->fill(HCands.at(0).mass());
-        _h["Inclusive_mH2000"]->fill(HCands.at(0).mass());
-        _h["Inclusive_mH2500"]->fill(HCands.at(0).mass());
-        _h["Inclusive_mH3000"]->fill(HCands.at(0).mass());
-        _h["Inclusive_mH1500_largewidth"]->fill(HCands.at(0).mass());
-        _h["Inclusive_mH2000_largewidth"]->fill(HCands.at(0).mass());
-        _h["Inclusive_mH2500_largewidth"]->fill(HCands.at(0).mass());
-        _h["Inclusive_mH3000_largewidth"]->fill(HCands.at(0).mass());
-      }
-      else{
-          _h["Inclusive_pT_H"]->fill(-999);
-          _h["Inclusive_mH"]->fill(-999);
-          _h["Inclusive_mH_zoomin"]->fill(-999);
-          _h["Inclusive_mH400"]->fill(-999);
-          _h["Inclusive_mH500"]->fill(-999);
-          _h["Inclusive_mH600"]->fill(-999);
-          _h["Inclusive_mH700"]->fill(-999);
-          _h["Inclusive_mH800"]->fill(-999);
-          _h["Inclusive_mH900"]->fill(-999);
-          _h["Inclusive_mH1000"]->fill(-999);
-          _h["Inclusive_mH1250"]->fill(-999);
-          _h["Inclusive_mH1500"]->fill(-999);
-          _h["Inclusive_mH2000"]->fill(-999);
-          _h["Inclusive_mH2500"]->fill(-999);
-          _h["Inclusive_mH3000"]->fill(-999);
-          _h["Inclusive_mH1500_largewidth"]->fill(-999);
-          _h["Inclusive_mH2000_largewidth"]->fill(-999);
-          _h["Inclusive_mH2500_largewidth"]->fill(-999);
-          _h["Inclusive_mH3000_largewidth"]->fill(-999);
-
-      }
-
-
-      _h["Inclusive_nTop_FromH_allevents"]->fill(topCandsFromH.size());
-
-      if (HCands.size()==1){
-        _h["Inclusive_nTop_FromH"]->fill(topCandsFromH.size());
-      }
-      else{
-        _h["Inclusive_nTop_FromH"]->fill(-999);
-      }
-
-
-      sortByPt(topCandsFromH);
-
-
-      if ( topCandsFromH.size() == 2 ){
-        double pT_ttbar_FromH = (topCandsFromH.at(0).momentum() + topCandsFromH.at(1).momentum()).pT()/GeV;
-        double dR_ttbar_FromH = fabs(deltaR(topCandsFromH.at(0),topCandsFromH.at(1)));
-        double InvM_ttbar_FromH = ( topCandsFromH.at(0).momentum() + topCandsFromH.at(1).momentum() ).mass()/GeV;
-
-        double pT_over_InvM_ttbar_FromH = pT_ttbar_FromH/InvM_ttbar_FromH;
-
-        // std::cout << "pT_ttbar = " << pT_ttbar << std::endl;
-        _h["Inclusive_pT_ttbar_FromH"]->fill(pT_ttbar_FromH);
-        _h["Inclusive_mTop1_FromH"]->fill(topCandsFromH.at(0).mass());
-        _h["Inclusive_mTop2_FromH"]->fill(topCandsFromH.at(1).mass());
-        _h["Inclusive_mTop1_zoomin_FromH"]->fill(topCandsFromH.at(0).mass());
-        _h["Inclusive_mTop2_zoomin_FromH"]->fill(topCandsFromH.at(1).mass());
-        _h["Inclusive_dR_ttbar_FromH"]->fill(dR_ttbar_FromH);
-        _h["Inclusive_InvM_FromH"]->fill(InvM_ttbar_FromH);
-        _h["Inclusive_InvM_FromH_zoomin"]->fill(InvM_ttbar_FromH);
-        _h["Inclusive_InvM_FromH400"]->fill(InvM_ttbar_FromH);
-        _h["Inclusive_InvM_FromH500"]->fill(InvM_ttbar_FromH);
-        _h["Inclusive_InvM_FromH600"]->fill(InvM_ttbar_FromH);
-        _h["Inclusive_InvM_FromH700"]->fill(InvM_ttbar_FromH);
-        _h["Inclusive_InvM_FromH800"]->fill(InvM_ttbar_FromH);
-        _h["Inclusive_InvM_FromH900"]->fill(InvM_ttbar_FromH);
-        _h["Inclusive_InvM_FromH1000"]->fill(InvM_ttbar_FromH);
-        _h["Inclusive_InvM_FromH1250"]->fill(InvM_ttbar_FromH);
-        _h["Inclusive_InvM_FromH1500"]->fill(InvM_ttbar_FromH);
-        _h["Inclusive_InvM_FromH2000"]->fill(InvM_ttbar_FromH);
-        _h["Inclusive_InvM_FromH2500"]->fill(InvM_ttbar_FromH);
-        _h["Inclusive_InvM_FromH3000"]->fill(InvM_ttbar_FromH);
-
-        _h["Inclusive_pToverInv_ttbar_FromH"]->fill(pT_over_InvM_ttbar_FromH);
+        _h["Inclusive_InvM_ttbar12"]->fill(InvM_ttbar12);
+        _h["Inclusive_pT_ttbar12"]->fill(pT_ttbar12);
+        _h["Inclusive_dR_ttbar12"]->fill(dR_ttbar12);
+        _h["Inclusive_mTop1"]->fill(topCands.at(0).mass());
+        _h["Inclusive_mTop2"]->fill(topCands.at(1).mass());
+        _h["Inclusive_mTop1_zoomin"]->fill(topCands.at(0).mass());
+        _h["Inclusive_mTop2_zoomin"]->fill(topCands.at(1).mass());
+        _h["Inclusive_InvM_400"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_500"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_600"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_700"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_800"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_900"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_1000"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_1100"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_1200"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_1250"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_1300"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_1400"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_1500"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_1600"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_1700"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_1800"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_1900"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_2000"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_2100"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_2200"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_2300"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_2400"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_2500"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_2600"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_2700"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_2800"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_2900"]->fill(InvM_ttbar12);
+        _h["Inclusive_InvM_3000"]->fill(InvM_ttbar12);
 
       }
       else{
-        _h["Inclusive_pT_ttbar_FromH"]->fill(-999);
-        _h["Inclusive_mTop1_FromH"]->fill(-999);
-        _h["Inclusive_mTop2_FromH"]->fill(-999);
-        _h["Inclusive_mTop1_zoomin_FromH"]->fill(-999);
-        _h["Inclusive_mTop2_zoomin_FromH"]->fill(-999);
-        _h["Inclusive_dR_ttbar_FromH"]->fill(-999);
-        _h["Inclusive_InvM_FromH"]->fill(-999);
-        _h["Inclusive_InvM_FromH_zoomin"]->fill(-999);
-        _h["Inclusive_InvM_FromH400"]->fill(-999);
-        _h["Inclusive_InvM_FromH500"]->fill(-999);
-        _h["Inclusive_InvM_FromH600"]->fill(-999);
-        _h["Inclusive_InvM_FromH700"]->fill(-999);
-        _h["Inclusive_InvM_FromH800"]->fill(-999);
-        _h["Inclusive_InvM_FromH900"]->fill(-999);
-        _h["Inclusive_InvM_FromH1000"]->fill(-999);
-        _h["Inclusive_InvM_FromH1250"]->fill(-999);
-        _h["Inclusive_InvM_FromH1500"]->fill(-999);
-        _h["Inclusive_InvM_FromH2000"]->fill(-999);
-        _h["Inclusive_InvM_FromH2500"]->fill(-999);
-        _h["Inclusive_InvM_FromH3000"]->fill(-999);
-        _h["Inclusive_pToverInv_ttbar_FromH"]->fill(-999);
-
+        _h["Inclusive_InvM_ttbar12"]->fill(-999);
+        _h["Inclusive_pT_ttbar12"]->fill(-999);
+        _h["Inclusive_dR_ttbar12"]->fill(-999);
+        _h["Inclusive_mTop1"]->fill(-999);
+        _h["Inclusive_mTop2"]->fill(-999);
+        _h["Inclusive_mTop1_zoomin"]->fill(-999);
+        _h["Inclusive_mTop2_zoomin"]->fill(-999);
+        _h["Inclusive_InvM_400"]->fill(-999);
+        _h["Inclusive_InvM_500"]->fill(-999);
+        _h["Inclusive_InvM_600"]->fill(-999);
+        _h["Inclusive_InvM_700"]->fill(-999);
+        _h["Inclusive_InvM_800"]->fill(-999);
+        _h["Inclusive_InvM_900"]->fill(-999);
+        _h["Inclusive_InvM_1000"]->fill(-999);
+        _h["Inclusive_InvM_1100"]->fill(-999);
+        _h["Inclusive_InvM_1200"]->fill(-999);
+        _h["Inclusive_InvM_1250"]->fill(-999);
+        _h["Inclusive_InvM_1300"]->fill(-999);
+        _h["Inclusive_InvM_1400"]->fill(-999);
+        _h["Inclusive_InvM_1500"]->fill(-999);
+        _h["Inclusive_InvM_1600"]->fill(-999);
+        _h["Inclusive_InvM_1700"]->fill(-999);
+        _h["Inclusive_InvM_1800"]->fill(-999);
+        _h["Inclusive_InvM_1900"]->fill(-999);
+        _h["Inclusive_InvM_2000"]->fill(-999);
+        _h["Inclusive_InvM_2100"]->fill(-999);
+        _h["Inclusive_InvM_2200"]->fill(-999);
+        _h["Inclusive_InvM_2300"]->fill(-999);
+        _h["Inclusive_InvM_2400"]->fill(-999);
+        _h["Inclusive_InvM_2500"]->fill(-999);
+        _h["Inclusive_InvM_2600"]->fill(-999);
+        _h["Inclusive_InvM_2700"]->fill(-999);
+        _h["Inclusive_InvM_2800"]->fill(-999);
+        _h["Inclusive_InvM_2900"]->fill(-999);
+        _h["Inclusive_InvM_3000"]->fill(-999);
       }
 
-      if ( topCandsFromNonH.size() == 2 ){
-        double pT_ttbar_FromNonH = (topCandsFromNonH.at(0).momentum() + topCandsFromNonH.at(1).momentum()).pT()/GeV;
-        double dR_ttbar_FromNonH = fabs(deltaR(topCandsFromNonH.at(0),topCandsFromNonH.at(1)));
-        double InvM_ttbar_FromNonH = ( topCandsFromNonH.at(0).momentum() + topCandsFromNonH.at(1).momentum() ).mass()/GeV;
-        double pT_over_InvM_ttbar_FromNonH = pT_ttbar_FromNonH/InvM_ttbar_FromNonH;
+      if ( topCands.size() > 3 ) {
+        double InvM_ttbar34 = (topCands.at(2).momentum() + topCands.at(3).momentum() ).mass()/GeV;
+        double pT_ttbar34 = (topCands.at(2).momentum() + topCands.at(3).momentum()).pT()/GeV;
+        double dR_ttbar34 = fabs(deltaR(topCands.at(2),topCands.at(3)));
 
-        // std::cout << "pT_ttbar = " << pT_ttbar << std::endl;
-        _h["Inclusive_pT_ttbar_FromNonH"]->fill(pT_ttbar_FromNonH);
-        _h["Inclusive_mTop1_FromNonH"]->fill(topCandsFromNonH.at(0).mass());
-        _h["Inclusive_mTop2_FromNonH"]->fill(topCandsFromNonH.at(1).mass());
-        _h["Inclusive_mTop1_zoomin_FromNonH"]->fill(topCandsFromNonH.at(0).mass());
-        _h["Inclusive_mTop2_zoomin_FromNonH"]->fill(topCandsFromNonH.at(1).mass());
-        _h["Inclusive_dR_ttbar_FromNonH"]->fill(dR_ttbar_FromNonH);
-
-        _h["Inclusive_InvM_FromNonH"]->fill(InvM_ttbar_FromNonH);
-        _h["Inclusive_pToverInv_ttbar_FromNonH"]->fill(pT_over_InvM_ttbar_FromNonH);
-
+        _h["Inclusive_InvM_ttbar34"]->fill(InvM_ttbar34);
+        _h["Inclusive_pT_ttbar34"]->fill(pT_ttbar34);
+        _h["Inclusive_dR_ttbar34"]->fill(dR_ttbar34);
+        _h["Inclusive_mTop3"]->fill(topCands.at(2).mass());
+        _h["Inclusive_mTop4"]->fill(topCands.at(3).mass());
+        _h["Inclusive_mTop3_zoomin"]->fill(topCands.at(2).mass());
+        _h["Inclusive_mTop4_zoomin"]->fill(topCands.at(3).mass());
       }
       else{
-        _h["Inclusive_pT_ttbar_FromNonH"]->fill(-999);
-        _h["Inclusive_mTop1_FromNonH"]->fill(-999);
-        _h["Inclusive_mTop2_FromNonH"]->fill(-999);
-        _h["Inclusive_mTop1_zoomin_FromNonH"]->fill(-999);
-        _h["Inclusive_mTop2_zoomin_FromNonH"]->fill(-999);
-        _h["Inclusive_dR_ttbar_FromNonH"]->fill(-999);
-
-        _h["Inclusive_InvM_FromNonH"]->fill(-999);
-        _h["Inclusive_pToverInv_ttbar_FromNonH"]->fill(-999);
+        _h["Inclusive_InvM_ttbar34"]->fill(-999);
+        _h["Inclusive_pT_ttbar34"]->fill(-999);
+        _h["Inclusive_dR_ttbar34"]->fill(-999);
+        _h["Inclusive_mTop3"]->fill(-999);
+        _h["Inclusive_mTop4"]->fill(-999);
+        _h["Inclusive_mTop3_zoomin"]->fill(-999);
+        _h["Inclusive_mTop4_zoomin"]->fill(-999);
       }
 
       if (debug){
         MSG_INFO( "Number of top quark : " << topCands.size());
-        MSG_INFO( "Number of H boson:" << HCands.size());
-        MSG_INFO( "Number of Top quark is from H:" << topCandsFromH.size());
-        MSG_INFO( "Number of Top quark is from Non-H:" << topCandsFromNonH.size());
         MSG_INFO("#----------------DONE--------------#");
       }
     }

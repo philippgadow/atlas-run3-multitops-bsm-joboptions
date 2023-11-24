@@ -2,13 +2,16 @@ From https://github.com/philippgadow/atlas-run3-multitops-bsm-joboptions/tree/ma
 
 # Development of job options in Atlas MC Generation for Multi-Top-Quark searches
 
+**Modified to run for ttH/A r21 sample production**
+
 ## Run this example quickly
-Run in release `AthGeneration,23.6.11`
+Run in release `AthGeneration,21.6.106`
 
 List of releases: https://twiki.cern.ch/twiki/bin/view/AtlasProtected/PmgMcSoftware
 
 ```
 git clone --recursive git@github.com:philippgadow/atlas-run3-multitops-bsm-joboptions.git
+git checkout r21
 source setup.sh
 bash run.sh
 ```
@@ -31,9 +34,7 @@ Some rivet routines are included in this repo. To run, include the desired routi
 To produce only the plots (run this from the directory where the `.yoda` file is found): 
 
 ```bash
-# the setupRivet script is provided to the PATH after AthGeneration was setup, see e.g.
-# /cvmfs/atlas.cern.ch/repo/sw/software/23.6/AthGeneration/23.6.11/InstallArea/x86_64-centos7-gcc11-opt/bin/setupRivet
-source setupRivet
+source setupRivet.sh
 
 # single set of events
 rivet-mkhtml --errs --no-weights  -o my_plots Rivet.yoda:"Title=validation plots"
@@ -46,121 +47,26 @@ rivet-mkhtml --errs --no-weights  -o my_plots output/100400_13000GeV_372777/Rive
 
 ### Signals
 
-| DSID   | process      | mass | width | ct   | theta | decay chain                        | reweight |
-| ------ | ------------ | ---- | ----- | ---- | ----- | ---------------------------------- | -------- |
-| 100000 | ttZ' restt   | 1000 | AUTO  |  2.5 |  pi/4 | p > v1 t t~, v1 > t t~             | yes      |
-
-| DSID   | process      | mass | width | tan beta | decay chain                      |
-| ------ | ------------ | ---- | ----- | -------- | -------------------------------- |
-| 100200 | ttH restt    |  400 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-| 100201 | ttH restt    | 1000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-| 100202 | ttH restt    | 2000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-| 100300 | tjH 5FS      |  400 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-| 100301 | tjH 5FS      | 1000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-| 100302 | tjH 5FS      | 2000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-| 100400 | tWH 5FS      | 400  | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-| 100401 | tWH 5FS      | 1000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-| 100402 | tWH 5FS      | 2000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-| 100500 | tjH 4FS      |  400 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-| 100501 | tjH 4FS      | 1000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-| 100502 | tjH 4FS      | 2000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-| 100600 | tWH 4FS      |  400 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-| 100601 | tWH 4FS      | 1000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-| 100602 | tWH 4FS      | 2000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-| 100700 | ttH 4FS      |  400 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-| 100701 | ttH 4FS      | 1000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-| 100702 | ttH 4FS      | 2000 | 5     |  10      | H > t t~, (t > w+ b, t~ > w- b~) |
-
-| DSID   | process      | mass | width | ct   | theta | decay chain                        | reweight |
-| ------ | ------------ | ---- | ----- | ---- | ----- | ---------------------------------- | -------- |
-| 100800 | ttZ' s chan  |  400 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100801 | ttZ' s chan  |  500 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100802 | ttZ' s chan  |  600 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100803 | ttZ' s chan  |  700 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100804 | ttZ' s chan  |  800 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100805 | ttZ' s chan  |  900 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100806 | ttZ' s chan  | 1000 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100807 | ttZ' s chan  | 1250 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100808 | ttZ' s chan  | 1500 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100809 | ttZ' s chan  | 2000 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100810 | ttZ' s chan  | 2500 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100811 | ttZ' s chan  | 3000 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100812 | ttZ' s+t ch  |  400 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100813 | ttZ' s+t ch  |  500 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100814 | ttZ' s+t ch  |  600 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100815 | ttZ' s+t ch  |  700 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100816 | ttZ' s+t ch  |  800 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100817 | ttZ' s+t ch  |  900 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100818 | ttZ' s+t ch  | 1000 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100819 | ttZ' s+t ch  | 1250 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100820 | ttZ' s+t ch  | 1500 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100821 | ttZ' s+t ch  | 2000 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100822 | ttZ' s+t ch  | 2500 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100823 | ttZ' s+t ch  | 3000 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100824 | tjZ' s chan  |  400 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100825 | tjZ' s chan  |  500 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100826 | tjZ' s chan  |  600 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100827 | tjZ' s chan  |  700 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100828 | tjZ' s chan  |  800 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100829 | tjZ' s chan  |  900 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100830 | tjZ' s chan  | 1000 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100831 | tjZ' s chan  | 1250 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100832 | tjZ' s chan  | 1500 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100833 | tjZ' s chan  | 2000 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100834 | tjZ' s chan  | 2500 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100835 | tjZ' s chan  | 3000 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100836 | tWZ' s chan  |  400 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100837 | tWZ' s chan  |  500 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100838 | tWZ' s chan  |  600 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100839 | tWZ' s chan  |  700 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100840 | tWZ' s chan  |  800 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100841 | tWZ' s chan  |  900 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100842 | tWZ' s chan  | 1000 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100843 | tWZ' s chan  | 1250 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100844 | tWZ' s chan  | 1500 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100845 | tWZ' s chan  | 2000 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100846 | tWZ' s chan  | 2500 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100847 | tWZ' s chan  | 3000 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100848 | ttZ' s+t SM  |  400 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100849 | ttZ' s+t SM  |  500 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100850 | ttZ' s+t SM  |  600 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100851 | ttZ' s+t SM  |  700 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100852 | ttZ' s+t SM  |  800 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100853 | ttZ' s+t SM  |  900 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100854 | ttZ' s+t SM  | 1000 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100855 | ttZ' s+t SM  | 1250 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100856 | ttZ' s+t SM  | 1500 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100857 | ttZ' s+t SM  | 2000 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100858 | ttZ' s+t SM  | 2500 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100859 | ttZ' s+t SM  | 3000 | AUTO  |  2.5 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-
-
-### Backgrounds
-
-#### Multi-top
-
-| DSID   | r21 DSID | process | link to JO |
-| ------ | -------- | ------- | ---------- |
-| 100100 | 412043   | tttt (NLO) aMCPy8EG | [412043](https://gitlab.cern.ch/atlas-physics/pmg/infrastructure/mc15joboptions/-/blob/master/share/DSID412xxx/MC15.412043.aMcAtNloPythia8EvtGen_A14NNPDF31_SM4topsNLO.py) [`MadGraphControl_SM4topsNLO.py`](https://gitlab.cern.ch/atlas-physics/pmg/infrastructure/mc15joboptions/-/blob/master/common/MadGraph/MadGraphControl_SM4topsNLO.py) |
-| 100101 | 412043   | tttt (NLO) aMCHw7EG | [412044](https://gitlab.cern.ch/atlas-physics/pmg/infrastructure/mc15joboptions/-/blob/master/share/DSID412xxx/MC15.412044.aMcAtNloHerwig7EvtGen_H7UE_SM4topsNLO.py) [`MadGraphControl_SM4topsNLO.py`](https://gitlab.cern.ch/atlas-physics/pmg/infrastructure/mc15joboptions/-/blob/master/common/MadGraph/MadGraphControl_SM4topsNLO.py) |
-| 100102 | 412115   | tttt (LO) QCD | [412115](https://gitlab.cern.ch/atlas-physics/pmg/infrastructure/mc15joboptions/-/blob/master/share/DSID412xxx/MC15.412115.MadGraphPythia8EvtGen_A14NNPDF31_SM4topsLO.py) [`MadGraphControl_SM4topsLO.py`](https://gitlab.cern.ch/atlas-physics/pmg/infrastructure/mc15joboptions/-/blob/master/common/MadGraph/MadGraphControl_SM4topsLO.py) |
-| 100103 | 500326   | tttt (LO) QCD + EWK | [500326](https://gitlab.cern.ch/atlas-physics/pmg/mcjoboptions/-/tree/master/500xxx/500326) |
-
-#### ttH
-
-| DSID   | r21 DSID | process | link to JO |
-| ------ | -------- | ------- | ---------- |
-| 101000 |          | ttH (semilep tt) PhPy8 | still testing |
-| 101001 |          | ttH (semilep tt) PhH7  | still testing |
-| 101002 |          | ttH (dilep tt) PhPy8   | still testing |
-| 101002 |          | ttH (dilep tt) PhH7    | still testing |
-
-#### rare tt+X
-
-| DSID   | r21 DSID | process | link to JO |
-| ------ | -------- | ------- | ---------- |
-| 101004 | 410081   | ttWW | [410081](https://gitlab.cern.ch/atlas-physics/pmg/infrastructure/mc15joboptions/-/blob/master/share/DSID410xxx/MC15.410081.MadGraphPythia8EvtGen_A14NNPDF23_ttbarWW.py) [`MadGraphControl_ttVV_LO.py`](https://gitlab.cern.ch/atlas-physics/pmg/infrastructure/mc15joboptions/-/blob/master/common/MadGraph/MadGraphControl_ttVV_LO.py) |
-| 101005 | 500463   | ttWZ | [500463](https://gitlab.cern.ch/atlas-physics/pmg/mcjoboptions/-/tree/master/500xxx/500463) |
-| 101006 | 500460   | ttHH | [500460](https://gitlab.cern.ch/atlas-physics/pmg/mcjoboptions/-/tree/master/500xxx/500460) |
-| 101007 | 500461   | ttWH | [500461](https://gitlab.cern.ch/atlas-physics/pmg/mcjoboptions/-/tree/master/500xxx/500461) |
-| 101008 | 500462   | ttZZ | [500462](https://gitlab.cern.ch/atlas-physics/pmg/mcjoboptions/-/tree/master/500xxx/500462) |
+| DSID   | process      | mass | width | decay chain                        |
+| ------ | ------------ | ---- | ----- | ---------------------------------- |
+| 100000 | ttH (s+t ch) | 1000 | 30  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100001 | ttH (s+t ch) | 1100 | 40  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100002 | ttH (s+t ch) | 1200 | 45  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100003 | ttH (s+t ch) | 1300 | 50  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100004 | ttH (s+t ch) | 1400 | 60  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100005 | ttH (s+t ch) | 1500 | 75  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100006 | ttH (s+t ch) | 1600 | 80  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100007 | ttH (s+t ch) | 1700 | 85  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100008 | ttH (s+t ch) | 1800 | 90  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100009 | ttH (s+t ch) | 1900 | 95  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100010 | ttH (s+t ch) | 2000 | 100 | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100011 | ttH (s+t ch) | 2100 | 105 | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100012 | ttH (s+t ch) | 2200 | 110 | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100013 | ttH (s+t ch) | 2300 | 115 | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100014 | ttH (s+t ch) | 2400 | 120 | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100015 | ttH (s+t ch) | 2500 | 125 | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100016 | ttH (s+t ch) | 2600 | 130 | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100017 | ttH (s+t ch) | 2700 | 135 | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100018 | ttH (s+t ch) | 2800 | 140 | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100019 | ttH (s+t ch) | 2900 | 145 | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100020 | ttH (s+t ch) | 3000 | 150 | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |

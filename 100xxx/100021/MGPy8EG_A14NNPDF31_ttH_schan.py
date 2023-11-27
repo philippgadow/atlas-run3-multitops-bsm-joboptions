@@ -11,14 +11,15 @@ from random import randrange
 nevents=int(8.0*runArgs.maxEvents)
 mode=0
 
-# PDF set NNPDF31_lo_as_0118 (315000)
+# Initial pdf set NNPDF23_lo_as_0130_qed (247000)
 import MadGraphControl.MadGraphUtils
-MadGraphControl.MadGraphUtils.MADGRAPH_PDFSETTING={
-    'central_pdf': 315000, # NNPDF31_lo_as_0118 as nominal pdf set
-    'pdf_variations':[315000], # NNPDF31_nnlo_as_0118 variations
-    'alternative_pdfs':[247000,263000,247000,315200], # NNPDF23_lo_as_0130_qed, NNPDF30_lo_as_0130, NNPDF30_lo_as_0118, NNPDF31_lo_as_0130
-    'scale_variations':[0.5,1,2], # muR and muF variations (6-points scale variations)
-}
+
+# MadGraphControl.MadGraphUtils.MADGRAPH_PDFSETTING={
+#     'central_pdf': 315000, # NNPDF31_lo_as_0118 as nominal pdf set
+#     'pdf_variations':[315000], # NNPDF31_nnlo_as_0118 variations
+#     'alternative_pdfs':[247000,263000,247000,315200], # NNPDF23_lo_as_0130_qed, NNPDF30_lo_as_0130, NNPDF30_lo_as_0118, NNPDF31_lo_as_0130
+#     'scale_variations':[0.5,1,2], # muR and muF variations (6-points scale variations)
+# }
 
 beamEnergy=-999
 if hasattr(runArgs,'ecmEnergy'):
@@ -36,7 +37,7 @@ import model sm
 define p = g u c d s u~ c~ d~ s~
 define wdec = e+ mu+ ta+ e- mu- ta- ve vm vt ve~ vm~ vt~ g u c d s b u~ c~ d~ s~ b~
 import model 2HDMtypeII --modelname
-generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2 , (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)
+generate p p > t t~ h2, (h2 > t t~, (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)
 output -f
 """
 
@@ -71,10 +72,14 @@ extras = { 'python_seed': str(seed_num),
            'lhe_version':'3.0',
            'cut_decays':'F',
            'nevents' :int(nevents),
-           'use_syst' : 'True',
+           'pdlabel': 'lhapdf',
+           'lhaid': 315000,
+           'sys_pdf': 'NNPDF31_lo_as_0118',
+           'use_syst' : "True",
+           'sys_scalefact': '1 0.5 2'
            }
 
-process_dir = new_process(process_str, keepJpegs=False)
+process_dir = new_process(process_str)
 modify_run_card(process_dir=process_dir,runArgs=runArgs,settings=extras)
 
 masses={'35':str(mh2)+' # mh2',
@@ -117,7 +122,7 @@ params['HIGGS']=higgs
 modify_param_card(process_dir=process_dir,params=params)
 
 generate(process_dir=process_dir,runArgs=runArgs)
-arrange_output(process_dir=process_dir,runArgs=runArgs,lhe_version=3,saveProcDir=False)
+arrange_output(process_dir=process_dir,runArgs=runArgs,lhe_version=3,saveProcDir=True)
 
 include('Pythia8_i/Pythia8_A14_NNPDF23LO_EvtGen_Common.py')
 include("Pythia8_i/Pythia8_MadGraph.py")
@@ -132,4 +137,4 @@ filtSeq.TTbarWToLeptonFilter.Ptcut = 0.
 
 evgenConfig.description = 'MadGraph control heavy Higgs, 4tops'
 evgenConfig.keywords+=['Higgs','BSMHiggs']
-evgenConfig.contact = ['Nicola Orlando <nicola.orlando@cern.ch>, Hui-Chi Lin <hlin@cern.ch>']
+evgenConfig.contact = ['Nicola Orlando <nicola.orlando@cern.ch>']

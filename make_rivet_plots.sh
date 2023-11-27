@@ -2,27 +2,65 @@
 
 mkdir -p plots
 
-rivet-mkhtml --errs --no-weights  -o plots/ttWW \
-    output/101004_13000GeV_232718/Rivet.yoda.gz:"Title=ttWW sqrt(s)=13TeV" \
-    output/101004_13600GeV_211691/Rivet.yoda.gz:"Title=ttWW sqrt(s)=13.6TeV" \
-    output/410081_13000GeV_1234/Rivet.yoda.gz:"Title=ttWW MC16"
+RIVET_OUTPUT=`ls output/100000_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_1000 $RIVET_OUTPUT:"Title=ttH(tt) 1 TeV"
 
-rivet-mkhtml --errs --no-weights  -o plots/ttWZ \
-    output/101005_13000GeV_205354/Rivet.yoda.gz:"Title=ttWZ sqrt(s)=13TeV" \
-    output/101005_13600GeV_352296/Rivet.yoda.gz:"Title=ttWZ sqrt(s)=13.6TeV" \
-    output/500463_13000GeV_1234/Rivet.yoda.gz:"Title=ttWZ MC16"
+RIVET_OUTPUT=`ls output/100001_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_1100 $RIVET_OUTPUT:"Title=ttH(tt) 1.1 TeV"
 
-rivet-mkhtml --errs --no-weights  -o plots/ttHH \
-    output/101006_13000GeV_169702/Rivet.yoda.gz:"Title=ttHH sqrt(s)=13TeV" \
-    output/101006_13600GeV_276325/Rivet.yoda.gz:"Title=ttHH sqrt(s)=13.6TeV" \
-    output/500460_13000GeV_1234/Rivet.yoda.gz:"Title=ttHH MC16"
+RIVET_OUTPUT=`ls output/100002_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_1200 $RIVET_OUTPUT:"Title=ttH(tt) 1.2 TeV"
 
-rivet-mkhtml --errs --no-weights  -o plots/ttWH \
-    output/101007_13000GeV_214083/Rivet.yoda.gz:"Title=ttWH sqrt(s)=13TeV" \
-    output/101007_13600GeV_157325/Rivet.yoda.gz:"Title=ttWH sqrt(s)=13.6TeV" \
-    output/500461_13000GeV_1234/Rivet.yoda.gz:"Title=ttWH MC16"
+RIVET_OUTPUT=`ls output/100003_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_1300 $RIVET_OUTPUT:"Title=ttH(tt) 1.3 TeV"
 
-rivet-mkhtml --errs --no-weights  -o plots/ttZZ \
-    output/101008_13000GeV_196065/Rivet.yoda.gz:"Title=ttZZ sqrt(s)=13TeV" \
-    output/101008_13600GeV_251554/Rivet.yoda.gz:"Title=ttZZ sqrt(s)=13.6TeV" \
-    output/500462_13000GeV_1234/Rivet.yoda.gz:"Title=ttZZMC16"
+RIVET_OUTPUT=`ls output/100004_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_1400 $RIVET_OUTPUT:"Title=ttH(tt) 1.4 TeV"
+
+RIVET_OUTPUT=`ls output/100005_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_1500 $RIVET_OUTPUT:"Title=ttH(tt) 1.5 TeV"
+
+RIVET_OUTPUT=`ls output/100006_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_1600 $RIVET_OUTPUT:"Title=ttH(tt) 1.6 TeV"
+
+RIVET_OUTPUT=`ls output/100007_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_1700 $RIVET_OUTPUT:"Title=ttH(tt) 1.7 TeV"
+
+RIVET_OUTPUT=`ls output/100008_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_1800 $RIVET_OUTPUT:"Title=ttH(tt) 1.8 TeV"
+
+RIVET_OUTPUT=`ls output/100009_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_1900 $RIVET_OUTPUT:"Title=ttH(tt) 1.9 TeV"
+
+RIVET_OUTPUT=`ls output/100010_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_2000 $RIVET_OUTPUT:"Title=ttH(tt) 2 TeV"
+
+RIVET_OUTPUT=`ls output/100011_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_2100 $RIVET_OUTPUT:"Title=ttH(tt) 2.1 TeV"
+
+RIVET_OUTPUT=`ls output/100012_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_2200 $RIVET_OUTPUT:"Title=ttH(tt) 2.2 TeV"
+
+RIVET_OUTPUT=`ls output/100013_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_2300 $RIVET_OUTPUT:"Title=ttH(tt) 2.3 TeV"
+
+RIVET_OUTPUT=`ls output/100014_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_2400 $RIVET_OUTPUT:"Title=ttH(tt) 2.4 TeV"
+
+RIVET_OUTPUT=`ls output/100015_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_2500 $RIVET_OUTPUT:"Title=ttH(tt) 2.5 TeV"
+
+RIVET_OUTPUT=`ls output/100016_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_2600 $RIVET_OUTPUT:"Title=ttH(tt) 2.6 TeV"
+
+RIVET_OUTPUT=`ls output/100017_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_2700 $RIVET_OUTPUT:"Title=ttH(tt) 2.7 TeV"
+
+RIVET_OUTPUT=`ls output/100018_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_2800 $RIVET_OUTPUT:"Title=ttH(tt) 2.8 TeV"
+
+RIVET_OUTPUT=`ls output/100019_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_2900 $RIVET_OUTPUT:"Title=ttH(tt) 2.9 TeV"
+
+RIVET_OUTPUT=`ls output/100020_13000GeV_*/Rivet.yoda.gz`
+rivet-mkhtml --errs --no-weights  -o plots/ttH_3000 $RIVET_OUTPUT:"Title=ttH(tt) 3 TeV"

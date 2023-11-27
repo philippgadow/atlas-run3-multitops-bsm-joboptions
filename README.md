@@ -70,3 +70,4 @@ rivet-mkhtml --errs --no-weights  -o my_plots output/100400_13000GeV_372777/Rive
 | 100018 | ttH (s+t ch) | 2800 | 140 | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
 | 100019 | ttH (s+t ch) | 2900 | 145 | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
 | 100020 | ttH (s+t ch) | 3000 | 150 | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100021 | ttH (s ch)   | 1000 | 30  | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)|

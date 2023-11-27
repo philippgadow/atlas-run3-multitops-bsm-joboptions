@@ -2,9 +2,6 @@
 # on-the-fly generation of FV heavy Higgs MG5 events
 #---------------------------------------------------
 from MadGraphControl.MadGraphUtils import *
-import fnmatch
-import os
-import sys
 from random import randrange
 
 # Common factor working for all processes, minimum filter eff of the order of 30%
@@ -71,7 +68,6 @@ extras = { 'python_seed': str(seed_num),
            'lhe_version':'3.0',
            'cut_decays':'F',
            'nevents' :int(nevents),
-           'use_syst' : 'True',
            }
 
 process_dir = new_process(process_str, keepJpegs=False)
@@ -81,9 +77,7 @@ masses={'35':str(mh2)+' # mh2',
         '36':str(mh2),
         '37':str(mh2),
         '25':str(125),
-
         }
-# parameters={'35':str(wh2)}
 parameters={'35':
 str(wh2)+"""
 #  BR             NDA  ID1    ID2   ...

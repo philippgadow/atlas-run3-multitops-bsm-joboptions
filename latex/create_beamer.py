@@ -39,7 +39,8 @@ def create_beamer_presentation():
         f.write("\\begin{column}{0.5\\textwidth}\n")
         f.write("\\begin{table}\n")
         f.write("\\begin{tabular}{cc}\n")
-        f.write("\\textbf{Signal Mass (GeV)} & \\textbf{Signal Width (GeV)} \\\\\n")
+        f.write("\\textbf{Signal Mass} & \\textbf{Signal Width} \\\\\n")
+        f.write("\\textbf{(GeV)} & \\textbf{(GeV)} \\\\\n")
         # Explicit widths for first column
         widths = [30, 40, 45, 50, 60, 75, 80, 85, 90, 95, 100]
         for mass, width in zip(range(1000, 2100, 100), widths):
@@ -51,7 +52,8 @@ def create_beamer_presentation():
         f.write("\\begin{column}{0.5\\textwidth}\n")
         f.write("\\begin{table}\n")
         f.write("\\begin{tabular}{cc}\n")
-        f.write("\\textbf{Signal Mass (GeV)} & \\textbf{Signal Width (GeV)} \\\\\n")
+        f.write("\\textbf{Signal Mass} & \\textbf{Signal Width} \\\\\n")
+        f.write("\\textbf{(GeV)} & \\textbf{(GeV)} \\\\\n")
         # Loop for second column
         for mass in range(2100, 3100, 100):
             width = 105 + (mass - 2100) // 100 * 5

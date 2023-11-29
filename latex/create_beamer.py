@@ -32,6 +32,36 @@ def create_beamer_presentation():
         f.write("\\end{itemize}\n")
         f.write("\\end{frame}\n")
 
+        # Table with signal parameters
+        f.write("\\begin{frame}\n")
+        f.write("\\frametitle{Signal Mass and Width}\n")
+        f.write("\\begin{columns}\n")
+        f.write("\\begin{column}{0.5\\textwidth}\n")
+        f.write("\\begin{table}\n")
+        f.write("\\begin{tabular}{cc}\n")
+        f.write("\\textbf{Signal Mass (GeV)} & \\textbf{Signal Width (GeV)} \\\\\n")
+        # Explicit widths for first column
+        widths = [30, 40, 45, 50, 60, 75, 80, 85, 90, 95, 100]
+        for mass, width in zip(range(1000, 2100, 100), widths):
+            f.write(f"{mass} & {width} \\\\\n")
+        f.write("\\end{tabular}\n")
+        f.write("\\end{table}\n")
+        f.write("\\end{column}\n")
+
+        f.write("\\begin{column}{0.5\\textwidth}\n")
+        f.write("\\begin{table}\n")
+        f.write("\\begin{tabular}{cc}\n")
+        f.write("\\textbf{Signal Mass (GeV)} & \\textbf{Signal Width (GeV)} \\\\\n")
+        # Loop for second column
+        for mass in range(2100, 3100, 100):
+            width = 105 + (mass - 2100) // 100 * 5
+            f.write(f"{mass} & {width} \\\\\n")
+        f.write("\\end{tabular}\n")
+        f.write("\\end{table}\n")
+        f.write("\\end{column}\n")
+
+        f.write("\\end{columns}\n")
+        f.write("\\end{frame}\n")
         
         # Iterate over the samples
         samples_dir = "../plots"

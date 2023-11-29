@@ -1,0 +1,43 @@
+# BEGIN PLOT
+LegendOnly=//nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100006_13000GeV_177523/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_nJets //nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100022_13000GeV_353862/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_nJets
+DrawOnly=//nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100006_13000GeV_177523/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_nJets //nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100022_13000GeV_353862/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_nJets
+RatioPlotReference=//nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100006_13000GeV_177523/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_nJets
+RatioPlot=1
+LogY=1
+RatioPlotYLabel=Ratio
+Legend=1
+# END PLOT
+
+# BEGIN HISTO1D //nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100006_13000GeV_177523/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_nJets
+ErrorBars=1
+LineColor=red
+LineStyle=solid
+Path=//nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100006_13000GeV_177523/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_nJets
+ScaledBy=9.99999999999960746e-05
+Title=ttH(tt) 1.6 TeV
+# xlow	 xhigh	 val	 errminus	 errplus
+5.500000e+00	6.500000e+00	3.025286e-06	3.171361e-07	3.171361e-07
+6.500000e+00	7.500000e+00	2.094429e-05	8.344404e-07	8.344404e-07
+7.500000e+00	8.500000e+00	3.081802e-05	1.012197e-06	1.012197e-06
+8.500000e+00	9.500000e+00	3.467443e-05	1.073661e-06	1.073661e-06
+9.500000e+00	1.050000e+01	3.144968e-05	1.022517e-06	1.022517e-06
+1.050000e+01	1.150000e+01	2.194163e-05	8.540770e-07	8.540770e-07
+# END HISTO1D
+
+
+# BEGIN HISTO1D //nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100022_13000GeV_353862/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_nJets
+ErrorBars=1
+LineColor=blue
+LineStyle=solid
+Path=//nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100022_13000GeV_353862/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_nJets
+ScaledBy=9.99999999999971859e-05
+Title=SM tttt (LO)
+# xlow	 xhigh	 val	 errminus	 errplus
+5.500000e+00	6.500000e+00	5.865182e-05	6.324588e-06	6.324588e-06
+6.500000e+00	7.500000e+00	3.750988e-04	1.599427e-05	1.599427e-05
+7.500000e+00	8.500000e+00	5.469623e-04	1.931391e-05	1.931391e-05
+8.500000e+00	9.500000e+00	5.251384e-04	1.892467e-05	1.892467e-05
+9.500000e+00	1.050000e+01	4.194287e-04	1.691300e-05	1.691300e-05
+1.050000e+01	1.150000e+01	2.339253e-04	1.263078e-05	1.263078e-05
+# END HISTO1D
+

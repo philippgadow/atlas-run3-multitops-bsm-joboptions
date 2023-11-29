@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>Plots from Rivet analyses</title>
+<style>
+      html { font-family: sans-serif; }
+      img { border: 0; }
+      a { text-decoration: none; font-weight: bold; }
+    </style>
+            <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [["$","$"]]}
+        });
+        </script>
+        <script type="text/javascript" async
+          src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        
+
+        <script type="text/javascript">
+            function filterPlots(ana, patt) {
+                var regex = new RegExp(patt);
+                var sec = document.getElementById('ana_'+ana);
+                var plots = sec.getElementsByClassName('plot');
+                var i; for (i = 0; i < plots.length; ++i) {
+                    // var viz = (regex.test(plots[i].id)) ? 'visible' : 'hidden';
+                    // plots[i].style.visibility = viz;
+                    var dis = (regex.test(plots[i].id)) ? 'block' : 'none';
+                    plots[i].style.display = dis;
+                }
+                return false;
+           }
+        </script>
+        </head>
+<body><h2>Plots from Rivet analyses</h2>
+
+
+<h3><a href="tttt_ttH/index.html" style="text-decoration:none;">tttt_ttH</a></h3>
+<p></p>
+
+<h3><a href="tttt_ttH_1LOS/index.html" style="text-decoration:none;">tttt_ttH_1LOS</a></h3>
+<p></p>
+<footer style="clear:both; margin-top:3em; padding-top:3em">
+<p>Generated at Wednesday, 29. November 2023 11:40AM</p>
+<p>Created with command: <pre>rivet-mkhtml --errs --no-weights -o plots/ttH_2900 output/100019_13000GeV_383221/Rivet.yoda.gz:Title=ttH(tt) 2.9 TeV output/100022_13000GeV_353862/Rivet.yoda.gz:Title=SM tttt (LO)</pre></p>
+</footer>
+
+</body>
+</html>

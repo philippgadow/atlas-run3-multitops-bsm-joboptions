@@ -1,0 +1,37 @@
+# BEGIN PLOT
+LegendOnly=//nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100020_13000GeV_261650/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_entries //nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100022_13000GeV_353862/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_entries
+DrawOnly=//nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100020_13000GeV_261650/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_entries //nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100022_13000GeV_353862/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_entries
+RatioPlotReference=//nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100020_13000GeV_261650/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_entries
+RatioPlot=1
+LogY=1
+RatioPlotYLabel=Ratio
+Legend=1
+# END PLOT
+
+# BEGIN HISTO1D //nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100020_13000GeV_261650/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_entries
+ErrorBars=1
+LineColor=red
+LineStyle=solid
+Path=//nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100020_13000GeV_261650/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_entries
+ScaledBy=7.53012048192797253e-04
+Title=ttH(tt) 3 TeV
+# xlow	 xhigh	 val	 errminus	 errplus
+-5.000000e-01	8.333333e-01	0.000000e+00	0.000000e+00	0.000000e+00
+8.333333e-01	2.166667e+00	3.278608e-06	1.247241e-07	1.247241e-07
+2.166667e+00	3.500000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+# END HISTO1D
+
+
+# BEGIN HISTO1D //nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100022_13000GeV_353862/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_entries
+ErrorBars=1
+LineColor=blue
+LineStyle=solid
+Path=//nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100022_13000GeV_353862/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_entries
+ScaledBy=9.99999999999971859e-05
+Title=SM tttt (LO)
+# xlow	 xhigh	 val	 errminus	 errplus
+-5.000000e-01	8.333333e-01	0.000000e+00	0.000000e+00	0.000000e+00
+8.333333e-01	2.166667e+00	1.744721e-03	2.987342e-05	2.987342e-05
+2.166667e+00	3.500000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+# END HISTO1D
+

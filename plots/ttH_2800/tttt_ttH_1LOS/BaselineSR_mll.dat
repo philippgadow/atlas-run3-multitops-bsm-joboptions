@@ -1,0 +1,67 @@
+# BEGIN PLOT
+LegendOnly=//nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100018_13000GeV_257144/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_mll //nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100022_13000GeV_353862/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_mll
+DrawOnly=//nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100018_13000GeV_257144/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_mll //nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100022_13000GeV_353862/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_mll
+RatioPlotReference=//nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100018_13000GeV_257144/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_mll
+RatioPlot=1
+LogY=1
+RatioPlotYLabel=Ratio
+Legend=1
+# END PLOT
+
+# BEGIN HISTO1D //nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100018_13000GeV_257144/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_mll
+ErrorBars=1
+LineColor=red
+LineStyle=solid
+Path=//nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100018_13000GeV_257144/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_mll
+ScaledBy=9.99999999999853681e-05
+Title=ttH(tt) 2.8 TeV
+# xlow	 xhigh	 val	 errminus	 errplus
+0.000000e+00	1.000000e+01	1.252095e-10	1.252095e-10	1.252095e-10
+1.000000e+01	2.000000e+01	6.260474e-10	2.799769e-10	2.799769e-10
+2.000000e+01	3.000000e+01	8.764664e-10	3.312732e-10	3.312732e-10
+3.000000e+01	4.000000e+01	1.502514e-09	4.337384e-10	4.337384e-10
+4.000000e+01	5.000000e+01	2.253771e-09	5.312189e-10	5.312189e-10
+5.000000e+01	6.000000e+01	2.003352e-09	5.008380e-10	5.008380e-10
+6.000000e+01	7.000000e+01	1.627723e-09	4.514492e-10	4.514492e-10
+7.000000e+01	8.000000e+01	4.257123e-09	7.300905e-10	7.300905e-10
+8.000000e+01	9.000000e+01	3.005028e-09	6.133987e-10	6.133987e-10
+9.000000e+01	1.000000e+02	3.505866e-09	6.625464e-10	6.625464e-10
+1.000000e+02	1.100000e+02	5.258799e-09	8.114502e-10	8.114502e-10
+1.100000e+02	1.200000e+02	3.756285e-09	6.858006e-10	6.858006e-10
+1.200000e+02	1.300000e+02	4.883170e-09	7.819330e-10	7.819330e-10
+1.300000e+02	1.400000e+02	4.006704e-09	7.082918e-10	7.082918e-10
+1.400000e+02	1.500000e+02	5.384008e-09	8.210535e-10	8.210535e-10
+1.500000e+02	1.600000e+02	4.257123e-09	7.300905e-10	7.300905e-10
+1.600000e+02	1.700000e+02	4.006704e-09	7.082918e-10	7.082918e-10
+1.700000e+02	1.800000e+02	5.634427e-09	8.399308e-10	8.399308e-10
+# END HISTO1D
+
+
+# BEGIN HISTO1D //nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100022_13000GeV_353862/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_mll
+ErrorBars=1
+LineColor=blue
+LineStyle=solid
+Path=//nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100022_13000GeV_353862/Rivet.yoda.gz/tttt_ttH_1LOS/BaselineSR_mll
+ScaledBy=9.99999999999971859e-05
+Title=SM tttt (LO)
+# xlow	 xhigh	 val	 errminus	 errplus
+0.000000e+00	1.000000e+01	2.045994e-07	1.181255e-07	1.181255e-07
+1.000000e+01	2.000000e+01	6.137981e-07	2.045994e-07	2.045994e-07
+2.000000e+01	3.000000e+01	9.547970e-07	2.551802e-07	2.551802e-07
+3.000000e+01	4.000000e+01	8.865972e-07	2.458978e-07	2.458978e-07
+4.000000e+01	5.000000e+01	1.022997e-06	2.641366e-07	2.641366e-07
+5.000000e+01	6.000000e+01	1.636795e-06	3.341094e-07	3.341094e-07
+6.000000e+01	7.000000e+01	2.727991e-06	4.313333e-07	4.313333e-07
+7.000000e+01	8.000000e+01	1.909594e-06	3.608793e-07	3.608793e-07
+8.000000e+01	9.000000e+01	2.796191e-06	4.366917e-07	4.366917e-07
+9.000000e+01	1.000000e+02	1.636795e-06	3.341094e-07	3.341094e-07
+1.000000e+02	1.100000e+02	3.000791e-06	4.523862e-07	4.523862e-07
+1.100000e+02	1.200000e+02	2.864391e-06	4.419852e-07	4.419852e-07
+1.200000e+02	1.300000e+02	2.386993e-06	4.034754e-07	4.034754e-07
+1.300000e+02	1.400000e+02	1.909594e-06	3.608793e-07	3.608793e-07
+1.400000e+02	1.500000e+02	2.250593e-06	3.917780e-07	3.917780e-07
+1.500000e+02	1.600000e+02	1.909594e-06	3.608793e-07	3.608793e-07
+1.600000e+02	1.700000e+02	2.182393e-06	3.857962e-07	3.857962e-07
+1.700000e+02	1.800000e+02	1.568595e-06	3.270746e-07	3.270746e-07
+# END HISTO1D
+

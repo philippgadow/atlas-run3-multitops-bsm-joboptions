@@ -1,0 +1,51 @@
+# BEGIN PLOT
+LegendOnly=//nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100020_13000GeV_261650/Rivet.yoda.gz/tttt_ttH_1LOS/Inclusive_jet0Eta //nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100022_13000GeV_353862/Rivet.yoda.gz/tttt_ttH_1LOS/Inclusive_jet0Eta
+DrawOnly=//nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100020_13000GeV_261650/Rivet.yoda.gz/tttt_ttH_1LOS/Inclusive_jet0Eta //nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100022_13000GeV_353862/Rivet.yoda.gz/tttt_ttH_1LOS/Inclusive_jet0Eta
+RatioPlotReference=//nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100020_13000GeV_261650/Rivet.yoda.gz/tttt_ttH_1LOS/Inclusive_jet0Eta
+RatioPlot=1
+LogY=1
+RatioPlotYLabel=Ratio
+Legend=1
+# END PLOT
+
+# BEGIN HISTO1D //nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100020_13000GeV_261650/Rivet.yoda.gz/tttt_ttH_1LOS/Inclusive_jet0Eta
+ErrorBars=1
+LineColor=red
+LineStyle=solid
+Path=//nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100020_13000GeV_261650/Rivet.yoda.gz/tttt_ttH_1LOS/Inclusive_jet0Eta
+ScaledBy=7.53012048192797253e-04
+Title=ttH(tt) 3 TeV
+# xlow	 xhigh	 val	 errminus	 errplus
+-2.500000e+00	-2.000000e+00	1.771366e-07	4.734175e-08	4.734175e-08
+-2.000000e+00	-1.500000e+00	4.934520e-07	7.901557e-08	7.901557e-08
+-1.500000e+00	-1.000000e+00	1.201998e-06	1.233224e-07	1.233224e-07
+-1.000000e+00	-5.000000e-01	2.796228e-06	1.880947e-07	1.880947e-07
+-5.000000e-01	0.000000e+00	3.580690e-06	2.128499e-07	2.128499e-07
+0.000000e+00	5.000000e-01	3.821090e-06	2.198791e-07	2.198791e-07
+5.000000e-01	1.000000e+00	2.732964e-06	1.859547e-07	1.859547e-07
+1.000000e+00	1.500000e+00	1.328525e-06	1.296507e-07	1.296507e-07
+1.500000e+00	2.000000e+00	5.187572e-07	8.101627e-08	8.101627e-08
+2.000000e+00	2.500000e+00	1.518314e-07	4.382994e-08	4.382994e-08
+# END HISTO1D
+
+
+# BEGIN HISTO1D //nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100022_13000GeV_353862/Rivet.yoda.gz/tttt_ttH_1LOS/Inclusive_jet0Eta
+ErrorBars=1
+LineColor=blue
+LineStyle=solid
+Path=//nfs/dust/atlas/group/top/BS4Tops/r21/atlas-run3-multitops-bsm-joboptions/output/100022_13000GeV_353862/Rivet.yoda.gz/tttt_ttH_1LOS/Inclusive_jet0Eta
+ScaledBy=9.99999999999971859e-05
+Title=SM tttt (LO)
+# xlow	 xhigh	 val	 errminus	 errplus
+-2.500000e+00	-2.000000e+00	2.905310e-04	1.990686e-05	1.990686e-05
+-2.000000e+00	-1.500000e+00	7.488336e-04	3.195944e-05	3.195944e-05
+-1.500000e+00	-1.000000e+00	1.385820e-03	4.347703e-05	4.347703e-05
+-1.000000e+00	-5.000000e-01	1.984614e-03	5.202888e-05	5.202888e-05
+-5.000000e-01	0.000000e+00	2.429276e-03	5.756320e-05	5.756320e-05
+0.000000e+00	5.000000e-01	2.354256e-03	5.666742e-05	5.666742e-05
+5.000000e-01	1.000000e+00	2.029626e-03	5.261559e-05	5.261559e-05
+1.000000e+00	1.500000e+00	1.422648e-03	4.405094e-05	4.405094e-05
+1.500000e+00	2.000000e+00	7.174618e-04	3.128282e-05	3.128282e-05
+2.000000e+00	2.500000e+00	2.768912e-04	1.943395e-05	1.943395e-05
+# END HISTO1D
+

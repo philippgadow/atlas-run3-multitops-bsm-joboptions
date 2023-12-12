@@ -51,10 +51,10 @@ rivet-mkhtml --errs --no-weights  -o my_plots output/100400_13000GeV_372777/Rive
 | ------ | ------------ | ---- | ----- | ---------------------------------- |
 | 100000 | ttH (s+t ch) | 1000 | 30  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
 | 100001 | ttH (s+t ch) | 1100 | 40  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
-| 100002 | ttH (s+t ch) | 1200 | 45  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100002 | ttH (s+t ch) | 1200 | 40  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
 | 100003 | ttH (s+t ch) | 1300 | 50  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
-| 100004 | ttH (s+t ch) | 1400 | 60  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
-| 100005 | ttH (s+t ch) | 1500 | 75  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100004 | ttH (s+t ch) | 1400 | 50  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100005 | ttH (s+t ch) | 1500 | 60  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
 | 100006 | ttH (s+t ch) | 1600 | 80  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
 | 100007 | ttH (s+t ch) | 1700 | 85  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
 | 100008 | ttH (s+t ch) | 1800 | 90  | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
@@ -70,5 +70,27 @@ rivet-mkhtml --errs --no-weights  -o my_plots output/100400_13000GeV_372777/Rive
 | 100018 | ttH (s+t ch) | 2800 | 140 | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
 | 100019 | ttH (s+t ch) | 2900 | 145 | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
 | 100020 | ttH (s+t ch) | 3000 | 150 | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
-| 100021 | ttH (s ch)   | 1000 | 30  | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec)|
+| 100021 | ttH (s ch)   | 1000 | 30  | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |
 | 100022 | tttt (QCD+EWK) | - | -  | p p > t t~ t t~ QED=2 QCD=4 |
+| 100023 | ttH (s+t ch) | 1750 | 90 | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100024 | ttH (s+t ch) | 2250 | 110 | generate p p > t t~ t t~ / a h3 h1 z QCD=2 QED=2, (t > b w+, w+ > wdec wdec) |
+| 100025 | ttH (s ch)   | 1100 | 40  | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |
+| 100026 | ttH (s ch) | 1200 | 40  | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |
+| 100027 | ttH (s ch) | 1300 | 50  | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |
+| 100028 | ttH (s ch) | 1400 | 50  | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |
+| 100029 | ttH (s ch) | 1500 | 60  | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |
+| 100030 | ttH (s ch) | 1600 | 80  | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |
+| 100031 | ttH (s ch) | 1700 | 85  | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |
+| 100032 | ttH (s ch) | 1800 | 90  | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |
+| 100033 | ttH (s ch) | 1900 | 95  | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |
+| 100034 | ttH (s ch) | 2000 | 100 | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |
+| 100035 | ttH (s ch) | 2100 | 105 | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |
+| 100036 | ttH (s ch) | 2200 | 110 | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |
+| 100037 | ttH (s ch) | 2300 | 115 | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |
+| 100038 | ttH (s ch) | 2400 | 120 | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |
+| 100039 | ttH (s ch) | 2500 | 125 | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |
+| 100040 | ttH (s ch) | 2600 | 130 | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |
+| 100041 | ttH (s ch) | 2700 | 135 | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |
+| 100042 | ttH (s ch) | 2800 | 140 | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |
+| 100043 | ttH (s ch) | 2900 | 145 | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |
+| 100044 | ttH (s ch) | 3000 | 150 | p p > t t~ h2, (h2 > t t~), (t > b w+, w+ > wdec wdec), (t~ > b~ w-, w- > wdec wdec) |

@@ -53,7 +53,19 @@ export RIVET_ANALYSIS_PATH=$RIVET_ANALYSIS_PATH:$PWD/rivet/
 mkdir -p $RESULTDIR
 rm -rf $TMPWORKDIR && mkdir -p $TMPWORKDIR
 cp -r ${DSID:0:3}xxx/$DSID $TMPWORKDIR/
-cp -r mcjoboptions/${DSID:0:3}xxx/$DSID $TMPWORKDIR/ 
+cp -r mcjoboptions/${DSID:0:3}xxx/$DSID $TMPWORKDIR/
+# copy directory with mother job option as well
+
+# copy 100000 job options if DSID is not 100000
+if [[ $DSID -ne 100000 ]]; then
+    echo "DSID is not 100000, copying 100000 job options"
+    cp -r 100xxx/100000/ $TMPWORKDIR/
+fi
+# copy 100021 job options if DSID is not 100021
+if [[ $DSID -ne 100021 ]]; then
+    echo "DSID is not 100021, copying 100021 job options"
+    cp -r 100xxx/100021/ $TMPWORKDIR/
+fi
 cp rivet/rivet.py $TMPWORKDIR
 if [[ -f "${INPUTGENFILE}" ]]; then
   cp -r ${INPUTGENFILE} $TMPWORKDIR/

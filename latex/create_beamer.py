@@ -35,41 +35,27 @@ def create_beamer_presentation():
         # Table with signal parameters
         f.write("\\begin{frame}\n")
         f.write("\\frametitle{Signal Mass and Width}\n")
-        f.write("\\begin{columns}\n")
-        f.write("\\begin{column}{0.5\\textwidth}\n")
         f.write("\\begin{table}\n")
         f.write("\\begin{tabular}{cc}\n")
         f.write("\\textbf{Signal Mass} & \\textbf{Signal Width} \\\\\n")
         f.write("\\textbf{(GeV)} & \\textbf{(GeV)} \\\\\n")
-        # Explicit widths for first column
-        widths = [30, 40, 45, 50, 60, 75, 80, 85, 90, 95, 100]
-        for mass, width in zip(range(1000, 2100, 100), widths):
+        masses = [1000, 1100, 1200, 1300, 1400, 1500, 1750, 2000, 2250, 2500]
+        widths = [30, 40, 40, 50, 50, 60, 90, 100, 110, 125]
+        for mass, width in zip(masses, widths):
             f.write(f"{mass} & {width} \\\\\n")
         f.write("\\end{tabular}\n")
         f.write("\\end{table}\n")
-        f.write("\\end{column}\n")
-
-        f.write("\\begin{column}{0.5\\textwidth}\n")
-        f.write("\\begin{table}\n")
-        f.write("\\begin{tabular}{cc}\n")
-        f.write("\\textbf{Signal Mass} & \\textbf{Signal Width} \\\\\n")
-        f.write("\\textbf{(GeV)} & \\textbf{(GeV)} \\\\\n")
-        # Loop for second column
-        for mass in range(2100, 3100, 100):
-            width = 105 + (mass - 2100) // 100 * 5
-            f.write(f"{mass} & {width} \\\\\n")
-        f.write("\\end{tabular}\n")
-        f.write("\\end{table}\n")
-        f.write("\\end{column}\n")
-
-        f.write("\\end{columns}\n")
         f.write("\\end{frame}\n")
         
         # Iterate over the samples
         samples_dir = "../plots"
+        sample_whitelist = masses
         samples = [d for d in os.listdir(samples_dir) if os.path.isdir(os.path.join(samples_dir, d))]
+
         for sample in sorted(samples):
             sample_mass = sample.split("_")[1]
+            if int(sample_mass) not in sample_whitelist:
+                continue
             sample_dir = os.path.join(samples_dir, sample)
             
             # Write the slide for tttt_ttH plots

@@ -2,7 +2,6 @@
 # on-the-fly generation of FV heavy Higgs MG5 events
 #---------------------------------------------------
 from MadGraphControl.MadGraphUtils import *
-from random import randrange
 
 # Common factor working for all processes, minimum filter eff of the order of 30%
 nevents=int(8.0*runArgs.maxEvents)
@@ -42,7 +41,7 @@ output -f
 #--------------------------------------------------------------
 ###
 # Parameters in the model parsed via JO
-# MH
+# MH (default parameters: mass 15 TeV, width 5 GeV, will be replaced by JO parameters in name)
 model_pars_str = str(jofile)
 mh2=int(15000)
 wh2=int(5)
@@ -60,12 +59,7 @@ for s in model_pars_str.split("_"):
             wh2 = int(ss)
             print("BSM Higgs mass wh2 set to %i"%wh2)
 
-
-seed_num = randrange(500000)
-print("hlin - random seed %i" % seed_num)
-
-extras = { 'python_seed': str(seed_num),
-           'lhe_version':'3.0',
+extras = { 'lhe_version':'3.0',
            'cut_decays':'F',
            'nevents' :int(nevents),
            }

@@ -3,11 +3,11 @@ from MadGraphControl.MadGraphUtils import *
 from itertools import product
 from math import pi, sqrt, sin
 from re import findall
-#---------------------------------------------------------------------------------------------------                                               
-# Set parameters                                                                                                                                   
+#---------------------------------------------------------------------------------------------------
+# Set parameters
 #---------------------------------------------------------------------------------------------------                                               
 lhe_version = 3.0
-safefactor = 1.1
+safefactor = 6
 
 # get job option name to extract parameters
 from MadGraphControl.MadGraphUtilsHelpers import get_physics_short
@@ -92,7 +92,7 @@ print("- resonance width {p}".format(p=width))
 print("- ME reweighting enabled {p}".format(p=reweight))
 
 
-#---------------------------------------------------------------------------------------------------                                               
+#---------------------------------------------------------------------------------------------------
 # Set PDF via base fragment and set parameters
 #---------------------------------------------------------------------------------------------------    
 
@@ -109,7 +109,7 @@ extras = {'auto_ptj_mjj':'False',
 # the resonance is written always to the LHE record
 # (does not affect cross-section, as no decay chain syntax is used for these processes)
 if process_id in ['tttt', 'ttttsm']:
-  extras['bwcutoff'] = 150
+  extras['bwcutoff'] = 500
 
 parameters = {
     'mass':{
@@ -131,8 +131,8 @@ nevents=int(runArgs.maxEvents * safefactor)
 if (nevents <0): nevents = 10000
 extras['nevents'] = nevents
 
-#---------------------------------------------------------------------------------------------------                                               
-# Determine MadGraph process                                                                                                                                 
+#---------------------------------------------------------------------------------------------------
+# Determine MadGraph process
 #---------------------------------------------------------------------------------------------------                                               
 process_string = {
  "tttt": "generate p p > t t~ t t~ QCD<=2 Qv1==2 QED==0",
@@ -153,13 +153,13 @@ output -f""".format(process_string=process_string[process_id])
 
 process_dir = new_process(process)
 
-#---------------------------------------------------------------------------------------------------                                               
-# Define run card                                                                                                                                   
+#---------------------------------------------------------------------------------------------------
+# Define run card
 #---------------------------------------------------------------------------------------------------                                               
 modify_run_card(process_dir=process_dir, runArgs=runArgs, settings=extras)
 
-#---------------------------------------------------------------------------------------------------                                               
-# Define parameter card                                                                                                                             
+#---------------------------------------------------------------------------------------------------
+# Define parameter card
 #---------------------------------------------------------------------------------------------------                                               
 modify_param_card(process_dir=process_dir, params={k:v for (k,v) in parameters.items()})
 
@@ -168,7 +168,7 @@ from MadGraphControl.MadGraphParamHelpers import set_top_params
 mtop=172.5
 set_top_params(process_dir=process_dir, mTop=mtop,FourFS=False)
 
-#---------------------------------------------------------------------------------------------------                                               
+#---------------------------------------------------------------------------------------------------
 # Add reweight card, therefore allowing for scans of theta1 and ct1
 #---------------------------------------------------------------------------------------------------                
 
@@ -196,15 +196,15 @@ if reweight:
   rcard.write(reweightCommand)
   rcard.close()
 
-#---------------------------------------------------------------------------------------------------                                               
-# Check cards and proceed with event generation                                                                                                                             
+#---------------------------------------------------------------------------------------------------
+# Check cards and proceed with event generation
 #---------------------------------------------------------------------------------------------------   
 print_cards()
 generate(process_dir=process_dir, runArgs=runArgs)
 arrange_output(process_dir=process_dir, runArgs=runArgs, lhe_version=lhe_version)
 
 #--------------------------------------------------------------
-# Storing information                                                                                                                  
+# Storing information
 #--------------------------------------------------------------
 # Some more information
 evgenConfig.description = process_ids[process_id]
@@ -213,7 +213,7 @@ evgenConfig.contact = ["James Ferrando <james.ferrando@desy.de>", "Philipp Gadow
 evgenConfig.process = "pp>ttv1>tttt"  # e.g. pp>G*>WW>qqqq
 
 #--------------------------------------------------------------
-# Parton shower                                                                                                                  
+# Parton shower
 #--------------------------------------------------------------
 # Finally, run the parton shower...
 include("Pythia8_i/Pythia8_A14_NNPDF23LO_EvtGen_Common.py")
@@ -224,7 +224,53 @@ include("Pythia8_i/Pythia8_MadGraph.py")
 #--------------------------------------------------------------
 # Event filter
 #--------------------------------------------------------------
-# Semi-leptonic decay filter
-include('GeneratorFilters/TTbarWToLeptonFilter.py')
-filtSeq.TTbarWToLeptonFilter.NumLeptons = -1 #no-allhad
-filtSeq.TTbarWToLeptonFilter.Ptcut = 0.
+### Set lepton filters
+if not hasattr(filtSeq, "MultiLeptonFilter" ):
+   from GeneratorFilters.GeneratorFiltersConf import MultiLeptonFilter
+   lepfilter = MultiLeptonFilter("lepfilter")
+   filtSeq += lepfilter
+if not hasattr(filtSeq, "LeptonPairFilter" ):
+   from GeneratorFilters.GeneratorFiltersConf import LeptonPairFilter
+   lepPairfilter = LeptonPairFilter("lepPairfilter")
+   filtSeq += lepPairfilter
+
+
+filtSeq.lepfilter.Ptcut = 15000.0 #MeV
+filtSeq.lepfilter.Etacut = 2.8
+filtSeq.lepfilter.NLeptons = 2 #minimum
+
+
+# no requirement on the OS pairs
+filtSeq.lepPairfilter.NSFOS_Max = -1 
+filtSeq.lepPairfilter.NSFOS_Min = -1
+filtSeq.lepPairfilter.NOFOS_Max = -1
+filtSeq.lepPairfilter.NOFOS_Min = -1
+
+
+filtSeq.lepPairfilter.NSFSS_Min = 0 # at least 0 SFSS pairs with NPairSum_Min which will give at least 1 SS pair
+filtSeq.lepPairfilter.NOFSS_Min = 0 # at least 0 OSSS pairs with NPairSum_Min which will give at least 1 SS pair
+filtSeq.lepPairfilter.NSFSS_Max = -1 # no requirement on max of SS pairs
+filtSeq.lepPairfilter.NOFSS_Max = -1 # no requirement on max of SS pairs
+
+# Count number of SS pair 
+filtSeq.lepPairfilter.UseSFSSInSum = True
+filtSeq.lepPairfilter.UseOFSSInSum = True
+filtSeq.lepPairfilter.UseSFOSInSum = False # no requirement on the OS pairs
+filtSeq.lepPairfilter.UseOFOSInSum = False # no requirement on the OS pairs
+
+# At least >=1 SS pair
+filtSeq.lepPairfilter.NPairSum_Min = 1 # at least 1 SS pairs
+filtSeq.lepPairfilter.NPairSum_Max = -1 # at least 1 SS pairs
+
+
+# Require the event have leptons from resonant decays but not heavy flavor decays (>20 GeV cut on the resonance...)
+# However, it will find the first parent particle 
+filtSeq.lepPairfilter.OnlyMassiveParents = False 
+
+filtSeq.lepPairfilter.Ptcut = 15000.0 #MeV
+filtSeq.lepPairfilter.Etacut = 2.8
+
+filtSeq.lepPairfilter.NLeptons_Min = 2
+filtSeq.lepPairfilter.NLeptons_Max = -1 # No max of leptons 
+
+filtSeq.Expression = "(lepfilter and lepPairfilter)"

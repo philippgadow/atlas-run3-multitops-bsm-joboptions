@@ -7,7 +7,7 @@ from re import findall
 # Set parameters
 #---------------------------------------------------------------------------------------------------                                               
 lhe_version = 3.0
-safefactor = 6
+safefactor = 20
 verbose_mode=False
 
 # get job option name to extract parameters

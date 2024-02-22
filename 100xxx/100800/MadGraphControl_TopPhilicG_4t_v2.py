@@ -3,11 +3,12 @@ from MadGraphControl.MadGraphUtils import *
 from itertools import product
 from math import pi, sqrt, sin
 from re import findall
-#---------------------------------------------------------------------------------------------------                                               
-# Set parameters                                                                                                                                   
-#---------------------------------------------------------------------------------------------------                                               
+#---------------------------------------------------------------------------------------------------
+# Set parameters
+#---------------------------------------------------------------------------------------------------
 lhe_version = 3.0
-safefactor = 1.1
+safefactor = 10
+verbose_mode = True
 
 # get job option name to extract parameters
 from MadGraphControl.MadGraphUtilsHelpers import get_physics_short
@@ -16,11 +17,11 @@ shortname = get_physics_short()
 # infer parameters from structure of job option unless they are explicitly set
 # assumed structure of JO name: mc.MGPy8EG_ttZp_{process}_m{mass}_ct{coupling}_th{chirality}.py
 process_ids = {
-  'tttt': 'BSM four top quark production with resonance, considering both s- and t-channel processes',
-  'ttttsm': 'SM+BSM four top quark production with resonance, considering both s- and t-channel processes',
   'restt': 'resonant s-channel production of BSM resonance: tt + Zp, Zp > tt',
   'resjt': 'resonant s-channel production of BSM resonance: tj + Zp, Zp > tt',
-  'reswt': 'resonant s-channel production of BSM resonance: tW + Zp, Zp > tt'
+  'reswt': 'resonant s-channel production of BSM resonance: tW + Zp, Zp > tt',
+  'tttt': 'BSM four top quark production with resonance, considering both s- and t-channel processes',
+  'ttttsm': 'SM+BSM four top quark production with resonance, considering both s- and t-channel processes',
 }
 try:
   process_id
@@ -71,7 +72,7 @@ except NameError:
 try:
   reweight
 except NameError:
-  reweight = True
+  reweight = False
   print('Info: {parameter} not set. Setting it to default value of {default}'.format(
     parameter="Reweighting enabled flag", default=reweight))
 
@@ -92,10 +93,9 @@ print("- resonance width {p}".format(p=width))
 print("- ME reweighting enabled {p}".format(p=reweight))
 
 
-#---------------------------------------------------------------------------------------------------                                               
+#---------------------------------------------------------------------------------------------------
 # Set PDF via base fragment and set parameters
-#---------------------------------------------------------------------------------------------------    
-
+#---------------------------------------------------------------------------------------------------
 import MadGraphControl.MadGraph_NNPDF30NLO_Base_Fragment
 
 extras = {'auto_ptj_mjj':'False',
@@ -105,11 +105,8 @@ extras = {'auto_ptj_mjj':'False',
           'dynamical_scale_choice':3,
           }
 
-# set bwcutoff to 100 for tttt and ttttsm production to ensure that
-# the resonance is written always to the LHE record
-# (does not affect cross-section, as no decay chain syntax is used for these processes)
-if process_id in ['tttt', 'ttttsm']:
-  extras['bwcutoff'] = 150
+# set bwcutoff to 15
+extras['bwcutoff'] = 15
 
 parameters = {
     'mass':{
@@ -131,47 +128,78 @@ nevents=int(runArgs.maxEvents * safefactor)
 if (nevents <0): nevents = 10000
 extras['nevents'] = nevents
 
-#---------------------------------------------------------------------------------------------------                                               
-# Determine MadGraph process                                                                                                                                 
-#---------------------------------------------------------------------------------------------------                                               
+#---------------------------------------------------------------------------------------------------
+# Determine MadGraph process
+#---------------------------------------------------------------------------------------------------                  
+# define decay string for resonant production
+decay_string = ", (v1 > t t~, (t > b w+ , w+ > wdec wdec), (t~ > b~ w- , w- > wdec wdec)),"
+decay_string += "(t > b w+ , w+ > wdec wdec), (t~ > b~ w- , w- > wdec wdec)"
+# non-resonant production will use MadSpin for decay
 process_string = {
- "tttt": "generate p p > t t~ t t~ QCD<=2 Qv1==2 QED==0",
- "ttttsm": "generate p p > t t~ t t~ QCD<=4 Qv1<=2 QED<=2",
- "restt": "generate p p > t t~ v1/v1, v1 > t t~",
- "resjt": "generate p p > top j v1/v1, v1 > t t~",
- "reswt": "generate p p > top w v1/v1, v1 > t t~",
+ "restt": "generate p p > t t~ v1" + decay_string,
+ "resjt": "generate p p > top j v1" + decay_string,
+ "reswt": "generate p p > top w v1" + decay_string,
+ "tttt": "generate p p > t t~ t t~ / a h z QED=0 QCD=2 Qv1=2",
+ "ttttsm": "generate p p > t t~ t t~ QCD=4 QED=2 Qv1=2",
 }
-
+# import model Top-Philic_UFO_V1_v2-nobmass
 process = """
 import model Top-Philic_UFO_V1_v2
 define p = g u c d s u~ c~ d~ s~ b b~
 define j = g u c d s u~ c~ d~ s~ b b~
 define top = t t~
 define w = w+ w-
+define wdec = e+ mu+ ta+ e- mu- ta- ve vm vt ve~ vm~ vt~ g u c d s b u~ c~ d~ s~ b~
 {process_string}
 output -f""".format(process_string=process_string[process_id])
 
-process_dir = new_process(process)
+process_dir = new_process(process, keepJpegs=verbose_mode)
 
-#---------------------------------------------------------------------------------------------------                                               
-# Define run card                                                                                                                                   
-#---------------------------------------------------------------------------------------------------                                               
+#---------------------------------------------------------------------------------------------------
+# Define run card
+#---------------------------------------------------------------------------------------------------
 modify_run_card(process_dir=process_dir, runArgs=runArgs, settings=extras)
 
-#---------------------------------------------------------------------------------------------------                                               
-# Define parameter card                                                                                                                             
-#---------------------------------------------------------------------------------------------------                                               
-modify_param_card(process_dir=process_dir, params={k:v for (k,v) in parameters.items()})
-
+#---------------------------------------------------------------------------------------------------
+# Define parameter card
+#---------------------------------------------------------------------------------------------------
 # apply PMG settings for top quark and SM particles
 from MadGraphControl.MadGraphParamHelpers import set_top_params
 mtop=172.5
 set_top_params(process_dir=process_dir, mTop=mtop,FourFS=False)
 
-#---------------------------------------------------------------------------------------------------                                               
+modify_param_card(process_dir=process_dir, params={k:v for (k,v) in parameters.items()})
+
+#---------------------------------------------------------------------------
+# MadSpin Card
+#---------------------------------------------------------------------------
+if process_id in ['tttt', 'ttttsm']:
+  bwcut = extras['bwcutoff']
+  madspin_card_loc=process_dir+'/Cards/madspin_card.dat'
+  mscard = open(madspin_card_loc,'w')
+  mscard.write("""#************************************************************
+  #*                        MadSpin                           *
+  #*                                                          *
+  #*    P. Artoisenet, R. Frederix, R. Rietkerk, O. Mattelaer *
+  #*                                                          *
+  #*    Part of the MadGraph5_aMC@NLO Framework:              *
+  #*    The MadGraph5_aMC@NLO Development Team - Find us at   *
+  #*    https://server06.fynu.ucl.ac.be/projects/madgraph     *
+  #*                                                          *
+  #************************************************************
+  set max_weight_ps_point 1000  # number of PS to estimate the maximum for each event
+  set BW_cut %i
+  set seed %i
+  define wdec = e+ mu+ ta+ e- mu- ta- ve vm vt ve~ vm~ vt~ g u c d s b u~ c~ d~ s~ b~
+  decay t > w+ b, w+ > wdec wdec 
+  decay t~ > w- b~, w- > wdec wdec
+  launch
+  """%(bwcut, runArgs.randomSeed))
+  mscard.close()
+
+#---------------------------------------------------------------------------------------------------
 # Add reweight card, therefore allowing for scans of theta1 and ct1
 #---------------------------------------------------------------------------------------------------                
-
 def compute_width(mass, ct, theta, mtop=172.5):
   return (ct**2 * mass / (8 * pi)) * \
          sqrt(1 - ((4 * mtop**2) / (mass**2))) * \
@@ -196,15 +224,15 @@ if reweight:
   rcard.write(reweightCommand)
   rcard.close()
 
-#---------------------------------------------------------------------------------------------------                                               
-# Check cards and proceed with event generation                                                                                                                             
+#---------------------------------------------------------------------------------------------------
+# Check cards and proceed with event generation
 #---------------------------------------------------------------------------------------------------   
 print_cards()
 generate(process_dir=process_dir, runArgs=runArgs)
-arrange_output(process_dir=process_dir, runArgs=runArgs, lhe_version=lhe_version)
+arrange_output(process_dir=process_dir, runArgs=runArgs, lhe_version=lhe_version, saveProcDir=verbose_mode)
 
 #--------------------------------------------------------------
-# Storing information                                                                                                                  
+# Storing information
 #--------------------------------------------------------------
 # Some more information
 evgenConfig.description = process_ids[process_id]
@@ -213,8 +241,11 @@ evgenConfig.contact = ["James Ferrando <james.ferrando@desy.de>", "Philipp Gadow
 evgenConfig.process = "pp>ttv1>tttt"  # e.g. pp>G*>WW>qqqq
 
 #--------------------------------------------------------------
-# Parton shower                                                                                                                  
+# Parton shower
 #--------------------------------------------------------------
+from MadGraphControl.MadGraphUtils import check_reset_proc_number
+check_reset_proc_number(opts)
+
 # Finally, run the parton shower...
 include("Pythia8_i/Pythia8_A14_NNPDF23LO_EvtGen_Common.py")
 
@@ -224,7 +255,53 @@ include("Pythia8_i/Pythia8_MadGraph.py")
 #--------------------------------------------------------------
 # Event filter
 #--------------------------------------------------------------
-# Semi-leptonic decay filter
-include('GeneratorFilters/TTbarWToLeptonFilter.py')
-filtSeq.TTbarWToLeptonFilter.NumLeptons = -1 #no-allhad
-filtSeq.TTbarWToLeptonFilter.Ptcut = 0.
+### Set lepton filters
+if not hasattr(filtSeq, "MultiLeptonFilter" ):
+   from GeneratorFilters.GeneratorFiltersConf import MultiLeptonFilter
+   lepfilter = MultiLeptonFilter("lepfilter")
+   filtSeq += lepfilter
+if not hasattr(filtSeq, "LeptonPairFilter" ):
+   from GeneratorFilters.GeneratorFiltersConf import LeptonPairFilter
+   lepPairfilter = LeptonPairFilter("lepPairfilter")
+   filtSeq += lepPairfilter
+
+
+filtSeq.lepfilter.Ptcut = 7000.0 #MeV
+filtSeq.lepfilter.Etacut = 2.8
+filtSeq.lepfilter.NLeptons = 2 #minimum
+
+
+# no requirement on the OS pairs
+filtSeq.lepPairfilter.NSFOS_Max = -1 
+filtSeq.lepPairfilter.NSFOS_Min = -1
+filtSeq.lepPairfilter.NOFOS_Max = -1
+filtSeq.lepPairfilter.NOFOS_Min = -1
+
+
+filtSeq.lepPairfilter.NSFSS_Min = 0 # at least 0 SFSS pairs with NPairSum_Min which will give at least 1 SS pair
+filtSeq.lepPairfilter.NOFSS_Min = 0 # at least 0 OSSS pairs with NPairSum_Min which will give at least 1 SS pair
+filtSeq.lepPairfilter.NSFSS_Max = -1 # no requirement on max of SS pairs
+filtSeq.lepPairfilter.NOFSS_Max = -1 # no requirement on max of SS pairs
+
+# Count number of SS pair 
+filtSeq.lepPairfilter.UseSFSSInSum = True
+filtSeq.lepPairfilter.UseOFSSInSum = True
+filtSeq.lepPairfilter.UseSFOSInSum = False # no requirement on the OS pairs
+filtSeq.lepPairfilter.UseOFOSInSum = False # no requirement on the OS pairs
+
+# At least >=1 SS pair
+filtSeq.lepPairfilter.NPairSum_Min = 1 # at least 1 SS pairs
+filtSeq.lepPairfilter.NPairSum_Max = -1 # at least 1 SS pairs
+
+
+# Require the event have leptons from resonant decays but not heavy flavor decays (>20 GeV cut on the resonance...)
+# However, it will find the first parent particle 
+filtSeq.lepPairfilter.OnlyMassiveParents = False 
+
+filtSeq.lepPairfilter.Ptcut = 7000.0 #MeV
+filtSeq.lepPairfilter.Etacut = 2.8
+
+filtSeq.lepPairfilter.NLeptons_Min = 2
+filtSeq.lepPairfilter.NLeptons_Max = -1 # No max of leptons 
+
+filtSeq.Expression = "(lepfilter and lepPairfilter)"

@@ -7,8 +7,8 @@ from re import findall
 # Set parameters
 #---------------------------------------------------------------------------------------------------                                               
 lhe_version = 3.0
-safefactor = 20
-verbose_mode=False
+safefactor = 10
+development_mode=False
 
 # get job option name to extract parameters
 from MadGraphControl.MadGraphUtilsHelpers import get_physics_short
@@ -131,14 +131,10 @@ extras['nevents'] = nevents
 #---------------------------------------------------------------------------------------------------
 # Determine MadGraph process
 #---------------------------------------------------------------------------------------------------                  
-# define decay string for resonant production
-decay_string = ", (v1 > t t~, (t > b w+ , w+ > wdec wdec), (t~ > b~ w- , w- > wdec wdec)),"
-decay_string += "(t > b w+ , w+ > wdec wdec), (t~ > b~ w- , w- > wdec wdec)"
-# non-resonant production will use MadSpin for decay
 process_string = {
- "restt": "generate p p > t t~ v1" + decay_string,
- "resjt": "generate p p > top j v1" + decay_string,
- "reswt": "generate p p > top w v1" + decay_string,
+ "restt": "generate p p > t t~ v1",
+ "resjt": "generate p p > top j v1",
+ "reswt": "generate p p > top w v1",
  "tttt": "generate p p > t t~ t t~ / a h z QED=0 QCD=2 Qv1=2",
  "ttttsm": "generate p p > t t~ t t~ QCD=4 QED=2 Qv1=2",
 }
@@ -153,7 +149,7 @@ define wdec = e+ mu+ ta+ e- mu- ta- ve vm vt ve~ vm~ vt~ g u c d s b u~ c~ d~ s~
 {process_string}
 output -f""".format(process_string=process_string[process_id])
 
-process_dir = new_process(process, keepJpegs=verbose_mode)
+process_dir = new_process(process, keepJpegs=development_mode)
 
 #---------------------------------------------------------------------------------------------------
 # Define run card
@@ -172,30 +168,29 @@ modify_param_card(process_dir=process_dir, params={k:v for (k,v) in parameters.i
 
 #---------------------------------------------------------------------------
 # MadSpin Card
-#---------------------------------------------------------------------------
-if process_id in ['tttt', 'ttttsm']:
-  bwcut = extras['bwcutoff']
-  madspin_card_loc=process_dir+'/Cards/madspin_card.dat'
-  mscard = open(madspin_card_loc,'w')
-  mscard.write("""#************************************************************
-  #*                        MadSpin                           *
-  #*                                                          *
-  #*    P. Artoisenet, R. Frederix, R. Rietkerk, O. Mattelaer *
-  #*                                                          *
-  #*    Part of the MadGraph5_aMC@NLO Framework:              *
-  #*    The MadGraph5_aMC@NLO Development Team - Find us at   *
-  #*    https://server06.fynu.ucl.ac.be/projects/madgraph     *
-  #*                                                          *
-  #************************************************************
-  set max_weight_ps_point 1000  # number of PS to estimate the maximum for each event
-  set BW_cut %i
-  set seed %i
-  define wdec = e+ mu+ ta+ e- mu- ta- ve vm vt ve~ vm~ vt~ g u c d s b u~ c~ d~ s~ b~
-  decay t > w+ b, w+ > wdec wdec 
-  decay t~ > w- b~, w- > wdec wdec
-  launch
-  """%(bwcut, runArgs.randomSeed))
-  mscard.close()
+#-------------------f--------------------------------------------------------
+bwcut = extras['bwcutoff']
+madspin_card_loc=process_dir+'/Cards/madspin_card.dat'
+mscard = open(madspin_card_loc,'w')
+mscard.write("""#************************************************************
+#*                        MadSpin                           *
+#*                                                          *
+#*    P. Artoisenet, R. Frederix, R. Rietkerk, O. Mattelaer *
+#*                                                          *
+#*    Part of the MadGraph5_aMC@NLO Framework:              *
+#*    The MadGraph5_aMC@NLO Development Team - Find us at   *
+#*    https://server06.fynu.ucl.ac.be/projects/madgraph     *
+#*                                                          *
+#************************************************************
+set max_weight_ps_point 1000  # number of PS to estimate the maximum for each event
+set BW_cut %i
+set seed %i
+define wdec = e+ mu+ ta+ e- mu- ta- ve vm vt ve~ vm~ vt~ g u c d s b u~ c~ d~ s~ b~
+decay t > w+ b, w+ > wdec wdec 
+decay t~ > w- b~, w- > wdec wdec
+launch
+"""%(bwcut, runArgs.randomSeed))
+mscard.close()
 
 #---------------------------------------------------------------------------------------------------
 # Add reweight card, therefore allowing for scans of theta1 and ct1
@@ -207,10 +202,13 @@ def compute_width(mass, ct, theta, mtop=172.5):
 
 
 if reweight:
-  ct1_scan = [1.00, 1.25, 1.50, 1.75, 2.00, 2.25, 2.50, 2.75, 3.00, 3.50, 4.00, 4.50, 5.00]
+  ct1_scan = [1.00, 1.50, 2.00, 2.50, 3.00, 3.50, 4.00, 4.50]
   theta1_scan = [0., 1./8.*pi, 2./8.*pi, 3./8.*pi, 4./8.*pi, 5./8.*pi, 6./8.*pi, 7./8.*pi, pi]
+  if development_mode: # reduced scan for development
+    ct1_scan = [1.00, 2.00, 3.00, 4.00, 5.00]
+    theta1_scan = [0., 2./8.*pi, 4./8.*pi]
 
-  reweightCommand=""
+  reweightCommand = "change keep_ordering True\n"
   for i_ct1, i_theta1 in product(ct1_scan, theta1_scan):
     reweightCommand += "launch --rwgt_info=rwgt_ct_{ct1_str}_theta_{theta1_str} --rwgt_name=rwgt_ct_{ct1_str}_theta_{theta1_str}\n".format(
       ct1_str=str(i_ct1).replace('.', 'p'), theta1_str="{0:.2f}".format(i_theta1).replace('.', 'p')
@@ -218,8 +216,7 @@ if reweight:
     reweightCommand += "set v0params 1 {ct1}\n".format(ct1=i_ct1)
     reweightCommand += "set v1params 1 {theta1}\n".format(theta1=i_theta1)
     width = compute_width(mass, i_ct1, i_theta1, mtop)
-    reweightCommand += "set decay 6000055 {width}\n".format(width=width)
-    reweightCommand += "change keep_ordering True\n\n"
+    reweightCommand += "set decay 6000055 {width}\n\n".format(width=width)
 
   rcard = open(os.path.join(process_dir,'Cards', 'reweight_card.dat'), 'w')
   rcard.write(reweightCommand)
@@ -230,7 +227,7 @@ if reweight:
 #---------------------------------------------------------------------------------------------------   
 print_cards()
 generate(process_dir=process_dir, runArgs=runArgs)
-arrange_output(process_dir=process_dir, runArgs=runArgs, lhe_version=lhe_version, saveProcDir=verbose_mode)
+arrange_output(process_dir=process_dir, runArgs=runArgs, lhe_version=lhe_version, saveProcDir=development_mode)
 
 #--------------------------------------------------------------
 # Storing information

@@ -218,7 +218,8 @@ if reweight:
     reweightCommand += "set v0params 1 {ct1}\n".format(ct1=i_ct1)
     reweightCommand += "set v1params 1 {theta1}\n".format(theta1=i_theta1)
     width = compute_width(mass, i_ct1, i_theta1, mtop)
-    reweightCommand += "set decay 6000055 {width}\n\n".format(width=width)
+    reweightCommand += "set decay 6000055 {width}\n".format(width=width)
+    reweightCommand += "change keep_ordering True\n\n"
 
   rcard = open(os.path.join(process_dir,'Cards', 'reweight_card.dat'), 'w')
   rcard.write(reweightCommand)

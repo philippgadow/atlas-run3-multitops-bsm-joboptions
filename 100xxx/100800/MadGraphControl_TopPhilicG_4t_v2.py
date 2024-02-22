@@ -72,7 +72,7 @@ except NameError:
 try:
   reweight
 except NameError:
-  reweight = False
+  reweight = True
   print('Info: {parameter} not set. Setting it to default value of {default}'.format(
     parameter="Reweighting enabled flag", default=reweight))
 
@@ -243,9 +243,6 @@ evgenConfig.process = "pp>ttv1>tttt"  # e.g. pp>G*>WW>qqqq
 #--------------------------------------------------------------
 # Parton shower
 #--------------------------------------------------------------
-from MadGraphControl.MadGraphUtils import check_reset_proc_number
-check_reset_proc_number(opts)
-
 # Finally, run the parton shower...
 include("Pythia8_i/Pythia8_A14_NNPDF23LO_EvtGen_Common.py")
 

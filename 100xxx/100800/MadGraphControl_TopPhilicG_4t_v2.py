@@ -5,10 +5,10 @@ from math import pi, sqrt, sin
 from re import findall
 #---------------------------------------------------------------------------------------------------
 # Set parameters
-#---------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------                                               
 lhe_version = 3.0
-safefactor = 10
-verbose_mode = True
+safefactor = 6
+verbose_mode=False
 
 # get job option name to extract parameters
 from MadGraphControl.MadGraphUtilsHelpers import get_physics_short
@@ -207,7 +207,7 @@ def compute_width(mass, ct, theta, mtop=172.5):
 
 
 if reweight:
-  ct1_scan = [0.50, 0.75, 1.00, 1.25, 1.50, 1.75, 2.00, 2.25, 2.50, 2.75, 3.00, 3.50, 4.00, 4.50, 5.00]
+  ct1_scan = [1.00, 1.25, 1.50, 1.75, 2.00, 2.25, 2.50, 2.75, 3.00, 3.50, 4.00, 4.50, 5.00]
   theta1_scan = [0., 1./8.*pi, 2./8.*pi, 3./8.*pi, 4./8.*pi, 5./8.*pi, 6./8.*pi, 7./8.*pi, pi]
 
   reweightCommand=""
@@ -258,6 +258,8 @@ include("Pythia8_i/Pythia8_MadGraph.py")
 ### Set lepton filters
 if not hasattr(filtSeq, "MultiLeptonFilter" ):
    from GeneratorFilters.GeneratorFiltersConf import MultiLeptonFilter
+   lepfilter_leading = MultiLeptonFilter("lepfilter_leading")
+   filtSeq += lepfilter_leading
    lepfilter = MultiLeptonFilter("lepfilter")
    filtSeq += lepfilter
 if not hasattr(filtSeq, "LeptonPairFilter" ):
@@ -266,7 +268,11 @@ if not hasattr(filtSeq, "LeptonPairFilter" ):
    filtSeq += lepPairfilter
 
 
-filtSeq.lepfilter.Ptcut = 7000.0 #MeV
+filtSeq.lepfilter_leading.Ptcut = 25000.0 #MeV
+filtSeq.lepfilter_leading.Etacut = 2.8
+filtSeq.lepfilter_leading.NLeptons = 1 #minimum
+
+filtSeq.lepfilter.Ptcut = 12000.0 #MeV
 filtSeq.lepfilter.Etacut = 2.8
 filtSeq.lepfilter.NLeptons = 2 #minimum
 
@@ -298,10 +304,10 @@ filtSeq.lepPairfilter.NPairSum_Max = -1 # at least 1 SS pairs
 # However, it will find the first parent particle 
 filtSeq.lepPairfilter.OnlyMassiveParents = False 
 
-filtSeq.lepPairfilter.Ptcut = 7000.0 #MeV
+filtSeq.lepPairfilter.Ptcut = 12000.0 #MeV
 filtSeq.lepPairfilter.Etacut = 2.8
 
 filtSeq.lepPairfilter.NLeptons_Min = 2
 filtSeq.lepPairfilter.NLeptons_Max = -1 # No max of leptons 
 
-filtSeq.Expression = "(lepfilter and lepPairfilter)"
+filtSeq.Expression = "(lepfilter_leading and lepfilter and lepPairfilter)"

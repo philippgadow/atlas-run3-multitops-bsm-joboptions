@@ -132,9 +132,9 @@ extras['nevents'] = nevents
 # Determine MadGraph process
 #---------------------------------------------------------------------------------------------------                  
 process_string = {
- "restt": "generate p p > t t~ v1",
- "resjt": "generate p p > top j v1",
- "reswt": "generate p p > top w v1",
+ "restt": "generate p p > t t~ v1, v1 > t t~",
+ "resjt": "generate p p > top j v1, v1 > t t~",
+ "reswt": "generate p p > top w v1, v1 > t t~",
  "tttt": "generate p p > t t~ t t~ / a h z QED=0 QCD=2 Qv1=2",
  "ttttsm": "generate p p > t t~ t t~ QCD=4 QED=2 Qv1=2",
 }
@@ -169,28 +169,28 @@ modify_param_card(process_dir=process_dir, params={k:v for (k,v) in parameters.i
 #---------------------------------------------------------------------------
 # MadSpin Card
 #-------------------f--------------------------------------------------------
-bwcut = extras['bwcutoff']
-madspin_card_loc=process_dir+'/Cards/madspin_card.dat'
-mscard = open(madspin_card_loc,'w')
-mscard.write("""#************************************************************
-#*                        MadSpin                           *
-#*                                                          *
-#*    P. Artoisenet, R. Frederix, R. Rietkerk, O. Mattelaer *
-#*                                                          *
-#*    Part of the MadGraph5_aMC@NLO Framework:              *
-#*    The MadGraph5_aMC@NLO Development Team - Find us at   *
-#*    https://server06.fynu.ucl.ac.be/projects/madgraph     *
-#*                                                          *
-#************************************************************
-set max_weight_ps_point 1000  # number of PS to estimate the maximum for each event
-set BW_cut %i
-set seed %i
-define wdec = e+ mu+ ta+ e- mu- ta- ve vm vt ve~ vm~ vt~ g u c d s b u~ c~ d~ s~ b~
-decay t > w+ b, w+ > wdec wdec 
-decay t~ > w- b~, w- > wdec wdec
-launch
-"""%(bwcut, runArgs.randomSeed))
-mscard.close()
+# bwcut = extras['bwcutoff']
+# madspin_card_loc=process_dir+'/Cards/madspin_card.dat'
+# mscard = open(madspin_card_loc,'w')
+# mscard.write("""#************************************************************
+# #*                        MadSpin                           *
+# #*                                                          *
+# #*    P. Artoisenet, R. Frederix, R. Rietkerk, O. Mattelaer *
+# #*                                                          *
+# #*    Part of the MadGraph5_aMC@NLO Framework:              *
+# #*    The MadGraph5_aMC@NLO Development Team - Find us at   *
+# #*    https://server06.fynu.ucl.ac.be/projects/madgraph     *
+# #*                                                          *
+# #************************************************************
+# set max_weight_ps_point 1000  # number of PS to estimate the maximum for each event
+# set BW_cut %i
+# set seed %i
+# define wdec = e+ mu+ ta+ e- mu- ta- ve vm vt ve~ vm~ vt~ g u c d s b u~ c~ d~ s~ b~
+# decay t > w+ b, w+ > wdec wdec 
+# decay t~ > w- b~, w- > wdec wdec
+# launch
+# """%(bwcut, runArgs.randomSeed))
+# mscard.close()
 
 #---------------------------------------------------------------------------------------------------
 # Add reweight card, therefore allowing for scans of theta1 and ct1
@@ -208,7 +208,7 @@ if reweight:
     ct1_scan = [1.00, 2.00, 3.00, 4.00, 5.00]
     theta1_scan = [0., 2./8.*pi, 4./8.*pi]
 
-  reweightCommand = "change keep_ordering True\n"
+  reweightCommand = ""
   for i_ct1, i_theta1 in product(ct1_scan, theta1_scan):
     reweightCommand += "launch --rwgt_info=rwgt_ct_{ct1_str}_theta_{theta1_str} --rwgt_name=rwgt_ct_{ct1_str}_theta_{theta1_str}\n".format(
       ct1_str=str(i_ct1).replace('.', 'p'), theta1_str="{0:.2f}".format(i_theta1).replace('.', 'p')

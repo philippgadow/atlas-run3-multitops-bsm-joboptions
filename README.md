@@ -73,18 +73,18 @@ rivet-mkhtml --errs --no-weights  -o my_plots output/100400_13000GeV_372777/Rive
 
 | DSID   | process      | mass | width | ct   | theta | decay chain                        | reweight |
 | ------ | ------------ | ---- | ----- | ---- | ----- | ---------------------------------- | -------- |
-| 100800 | ttZ' s chan  |  400 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100801 | ttZ' s chan  |  500 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100802 | ttZ' s chan  |  600 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100803 | ttZ' s chan  |  700 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100804 | ttZ' s chan  |  800 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100805 | ttZ' s chan  |  900 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100806 | ttZ' s chan  | 1000 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100807 | ttZ' s chan  | 1250 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100808 | ttZ' s chan  | 1500 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100809 | ttZ' s chan  | 2000 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100810 | ttZ' s chan  | 2500 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100811 | ttZ' s chan  | 3000 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
+| 100800 | ttZ' s chan  |  400 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100801 | ttZ' s chan  |  500 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100802 | ttZ' s chan  |  600 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100803 | ttZ' s chan  |  700 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100804 | ttZ' s chan  |  800 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100805 | ttZ' s chan  |  900 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100806 | ttZ' s chan  | 1000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100807 | ttZ' s chan  | 1250 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100808 | ttZ' s chan  | 1500 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100809 | ttZ' s chan  | 2000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100810 | ttZ' s chan  | 2500 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100811 | ttZ' s chan  | 3000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
 | 100812 | ttZ' s+t ch  |  400 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
 | 100813 | ttZ' s+t ch  |  500 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
 | 100814 | ttZ' s+t ch  |  600 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
@@ -97,30 +97,30 @@ rivet-mkhtml --errs --no-weights  -o my_plots output/100400_13000GeV_372777/Rive
 | 100821 | ttZ' s+t ch  | 2000 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
 | 100822 | ttZ' s+t ch  | 2500 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
 | 100823 | ttZ' s+t ch  | 3000 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100824 | tjZ' s chan  |  400 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100825 | tjZ' s chan  |  500 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100826 | tjZ' s chan  |  600 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100827 | tjZ' s chan  |  700 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100828 | tjZ' s chan  |  800 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100829 | tjZ' s chan  |  900 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100830 | tjZ' s chan  | 1000 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100831 | tjZ' s chan  | 1250 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100832 | tjZ' s chan  | 1500 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100833 | tjZ' s chan  | 2000 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100834 | tjZ' s chan  | 2500 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100835 | tjZ' s chan  | 3000 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100836 | tWZ' s chan  |  400 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100837 | tWZ' s chan  |  500 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100838 | tWZ' s chan  |  600 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100839 | tWZ' s chan  |  700 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100840 | tWZ' s chan  |  800 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100841 | tWZ' s chan  |  900 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100842 | tWZ' s chan  | 1000 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100843 | tWZ' s chan  | 1250 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100844 | tWZ' s chan  | 1500 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100845 | tWZ' s chan  | 2000 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100846 | tWZ' s chan  | 2500 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-| 100847 | tWZ' s chan  | 3000 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
+| 100824 | tjZ' s chan  |  400 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100825 | tjZ' s chan  |  500 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100826 | tjZ' s chan  |  600 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100827 | tjZ' s chan  |  700 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100828 | tjZ' s chan  |  800 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100829 | tjZ' s chan  |  900 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100830 | tjZ' s chan  | 1000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100831 | tjZ' s chan  | 1250 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100832 | tjZ' s chan  | 1500 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100833 | tjZ' s chan  | 2000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100834 | tjZ' s chan  | 2500 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100835 | tjZ' s chan  | 3000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100836 | tWZ' s chan  |  400 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100837 | tWZ' s chan  |  500 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100838 | tWZ' s chan  |  600 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100839 | tWZ' s chan  |  700 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100840 | tWZ' s chan  |  800 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100841 | tWZ' s chan  |  900 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100842 | tWZ' s chan  | 1000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100843 | tWZ' s chan  | 1250 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100844 | tWZ' s chan  | 1500 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100845 | tWZ' s chan  | 2000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100846 | tWZ' s chan  | 2500 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100847 | tWZ' s chan  | 3000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
 | 100848 | ttZ' s+t SM  |  400 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
 | 100849 | ttZ' s+t SM  |  500 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
 | 100850 | ttZ' s+t SM  |  600 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
@@ -133,7 +133,14 @@ rivet-mkhtml --errs --no-weights  -o my_plots output/100400_13000GeV_372777/Rive
 | 100857 | ttZ' s+t SM  | 2000 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
 | 100858 | ttZ' s+t SM  | 2500 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
 | 100859 | ttZ' s+t SM  | 3000 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
-
+| 100860 | tWZ' coupl.  |  400 | AUTO  |  3.0 |  pi/4 | p p > t t~ t~ w+ QCD=1 QED=1 Qv1=2 | yes      |
+| 100861 | tjZ' coupl.  |  400 | AUTO  |  3.0 |  pi/4 | generate p p > t t~ t j QCD=0 QED=2 Qv1=2 | yes      |
+| 100862 | ttZ' s+t ch  |  400 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100863 | ttZ' s+t ch  | 1000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100864 | ttZ' s+t ch  | 2000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100865 | ttZ' s+t ch  |  400 | AUTO  |  2.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100866 | ttZ' s+t ch  | 1000 | AUTO  |  2.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100867 | ttZ' s+t ch  | 2000 | AUTO  |  2.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
 
 ### Backgrounds
 

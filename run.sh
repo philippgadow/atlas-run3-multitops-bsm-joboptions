@@ -52,11 +52,15 @@ export RIVET_ANALYSIS_PATH=$RIVET_ANALYSIS_PATH:$PWD/rivet/
 
 mkdir -p $RESULTDIR
 rm -rf $TMPWORKDIR && mkdir -p $TMPWORKDIR
-cp -r ${DSID:0:3}xxx/$DSID $TMPWORKDIR/
-cp -r mcjoboptions/${DSID:0:3}xxx/$DSID $TMPWORKDIR/ 
+cp -r --dereference ${DSID:0:3}xxx/$DSID $TMPWORKDIR/
+# if DSID is not 100800, copy the 100xxx/100800 folder as well
+if [[ $DSID -ne 100800 ]]; then
+    cp -r --dereference 100xxx/100800 $TMPWORKDIR/
+fi
+cp -r --dereference mcjoboptions/${DSID:0:3}xxx/$DSID $TMPWORKDIR/ 
 cp rivet/rivet.py $TMPWORKDIR
 if [[ -f "${INPUTGENFILE}" ]]; then
-  cp -r ${INPUTGENFILE} $TMPWORKDIR/
+  cp -r --dereference ${INPUTGENFILE} $TMPWORKDIR/
 fi
 cd $TMPWORKDIR
 
@@ -84,6 +88,7 @@ cp $TMPWORKDIR/test_DSID_${DSID}.EVNT.root $RESULTDIR/
 cp $TMPWORKDIR/Rivet.yoda $RESULTDIR/
 cat log.generate
 cp $TMPWORKDIR/log.generate $RESULTDIR/
+find $TMPWORKDIR/PROC_Top-Philic_UFO_V1_v3-nobmass_0/SubProcesses -type f -name "*.jpg" -exec cp --parents {} $RESULTDIR/ \;
 rm -rf $TMPWORKDIR
 cd -
 
@@ -93,6 +98,3 @@ if [[ $MAKERIVETPLOTS -eq 1 ]]; then
     rivet-mkhtml --errs --no-weights -o rivet_plots Rivet.yoda.gz:Title=$RIVETTITLE
     cd -
 fi
-
-
-rivet-mkhtml ../../output/101005_13000GeV_339786//Rivet.yoda.gz:'ttWZ (mc20)' ../../output/101005_13600GeV_412724/Rivet.yoda.gz:'ttWZ(mc23)' ../../output/500463_13000GeV_1234/Rivet.yoda.gz:'ttWZ (mc16)'

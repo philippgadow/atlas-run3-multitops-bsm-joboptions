@@ -142,6 +142,10 @@ rivet-mkhtml --errs --no-weights  -o my_plots output/100400_13000GeV_372777/Rive
 | 100866 | ttZ' s+t ch  | 1000 | AUTO  |  2.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
 | 100867 | ttZ' s+t ch  | 2000 | AUTO  |  2.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
 
+| DSID   | process      | mass | width | tan beta | decay chain                      |
+| ------ | ------------ | ---- | ----- | -------- | -------------------------------- |
+| 100900 | ttH s+t ch   |  400 | 5     | 10       | only had                         |
+
 ### Backgrounds
 
 #### Multi-top

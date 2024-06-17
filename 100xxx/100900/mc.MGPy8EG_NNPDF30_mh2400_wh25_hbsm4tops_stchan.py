@@ -1,0 +1,1 @@
+include('MadGraphControl_HBSM4tops_stchan_tanb1_HttBR1_had.py')
